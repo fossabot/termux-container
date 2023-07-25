@@ -17,35 +17,36 @@
  * limitations under the License.
  *
  */
-// 此文件为CONTAINER_CONSOLE函数的c语言重构
-// 此文件不会随termux官方仓库更新，应被静态编译
-// 如果你的代码好不容易能跑起来了，就不要动它了
-// 难写的代码一定要难读
+// This file should be statically compiled.
 #include "container-console.h"
-// container-console结束后退出，用于ctrl-c捕获
-void restart(int unused)
+// Used for catching Ctrl-C, restart container-console.
+void restart(int)
 {
+  // Restart container-console.
   system("container-console");
-  // 没太大必要，但是在这里加一下
+  // Maybe not needed.
   system("stty icanon");
   system("stty echo");
   system("stty erase '^?'");
-  // 直接退出
+  // Exit.
   exit(0);
 }
-int main(void)
+int main()
 {
+  /*
+   * 100% shit-code here...
+   * At least it works...
+   */
   if (geteuid() == 0)
   {
     fprintf(stderr, "%s\n", "\033[33mWarning: container-console should not be run with root privileges!");
   }
-  // 判断termux-container是否存在
+  // Check if termux-container exists.
   if (system("container -t") != 0)
   {
     fprintf(stderr, "%s\n", "\033[31mError: termux-container not installed.");
     exit(1);
   }
-  // 设置默认值
   // 用于获取输入
   char input = 0;
   // 第一个参数，用于语法高亮
@@ -61,6 +62,7 @@ int main(void)
   // 历史记录文件定义
   FILE *history = NULL;
   char history_file[PATH_MAX];
+  // Maybe it's not necessary because $HOME in termux will always be /data/data/com.termux/files/home
   char *home = getenv("HOME");
   if (!home)
   {

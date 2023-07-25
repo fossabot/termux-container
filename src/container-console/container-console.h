@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  */
-// 从moe-container抄的，懒得改了能用就行。。。
+// Do not touch, it works.
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
