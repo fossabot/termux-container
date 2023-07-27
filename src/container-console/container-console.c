@@ -31,12 +31,74 @@ void restart(int)
   // Exit.
   exit(0);
 }
-int main()
+void show_greetings()
+{
+  /*
+   * Maybe nothing's useful here, just for fun.
+   */
+  // Get the size of terminal.
+  struct winsize size;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
+  unsigned short col = size.ws_col;
+  if (col % 2 == 1)
+  {
+    col -= 1;
+  }
+  // For centering output.
+  char space[col / 2 + 1];
+  space[0] = '\000';
+  if (col > 46)
+  {
+    col /= 2;
+    col -= 22;
+    for (unsigned short i = 1; i <= col; i++)
+    {
+      strcat(space, " ");
+    }
+  }
+  else
+  {
+    strcat(space, "");
+  }
+  printf("%s%s\n", space, "\033[1;38;2;66;66;66m               ▅▅▀▀▀▀▀▀▀▀▀▀▀▀▅");
+  printf("%s%s\n", space, "          ▅▅▀▀▀               ▀▀▅▅");
+  printf("%s%s\n", space, "     ▅▅▅▀▀            ▅           ▀▅");
+  printf("%s%s\n", space, "      ▅▀      ▅▀█▅▅▀▀▅▀▅        ▅▅  ▀▅");
+  printf("%s%s\n", space, "     ▅▀   █▅▀▀  ▀     ▀ ▀▀▅▅    █ ▀▀▅ █");
+  printf("%s%s\n", space, "    ▅▀   ▅▀  ▅▀      ▀▅    ▀▅   █▅███▀█");
+  printf("%s%s\n", space, "  ▅▅█▀▅ █ ▅▅▀          ▀▀   █   ████   █");
+  printf("%s%s\n", space, "      █ █ ▅▅▅▅▅        ▅▅▅▅▅ █  ▀█▀    █");
+  printf("%s%s\n", space, "      █ █▀ ▅▅▅ ▀      ▀ ▅▅▅ ▀█   █     █");
+  printf("%s%s\n", space, "      █ █ █\033[40;31m█▀█\033[0m\033[1;38;2;66;66;66m█        █\033[40;31m█▀█\033[0m\033[1;38;2;66;66;66m█ █   █     █");
+  printf("%s%s\n", space, "     █  █ █\033[31m███\033[1;38;2;66;66;66m█        █\033[31m███\033[1;38;2;66;66;66m█ █   █     ▀▅");
+  printf("%s%s\n", space, "    ▅▀  █  ▀▀▀          ▀▀▀  █   █      █");
+  printf("%s%s\n", space, "  ▅▀▅▀ █                     █   █      █");
+  printf("%s%s\n", space, " █   █ ▀▅ ▅▀▅   ▅▀▅   ▅▅     █   █      ▀▅");
+  printf("%s%s\n", space, "▅█▅▅██▅ ▅██  ▀███ ▅████ ▀▅█▀▅▀   █       ▀▅");
+  printf("%s%s\n", space, "███████ ▀██████████████████▀▀             █");
+  printf("%s%s\n", space, " █    ▀▅  ██▀ ▀██▀▀██▀▀██▀█     █▀         █");
+  printf("%s%s\n", space, " ▀▅     ▀▀█              ▅▀     █          █");
+  printf("%s%s\n", space, "   ▀▅    █               █     ██        ▅▀");
+  printf("%s%s\n", space, "     ▀▅▅▅▀                ▀▀▀▀▀ █        █");
+  printf("%s%s\n", space, "        ▀                       ▀        ▀");
+  printf("%s\n", "");
+  printf("%s%s\n", space, "\033[1;38;2;254;228;208m        Console of termux-container");
+  printf("%s%s\n", space, "         Made with  by Moe-hacker");
+  printf("%s%s\n", space, "           WARNING:  NO WARRANTY");
+  printf("%s%s\n", space, "         For usage,just type `help`");
+}
+int main(int argc, char *argv[])
 {
   /*
    * 100% shit-code here...
    * At least it works...
    */
+  // XXX
+  // Used for termux-container.
+  if (argc > 1)
+  {
+    show_greetings();
+  }
   if (geteuid() == 0)
   {
     fprintf(stderr, "%s\n", "\033[33mWarning: container-console should not be run with root privileges!");
@@ -47,19 +109,19 @@ int main()
     fprintf(stderr, "%s\n", "\033[31mError: termux-container not installed.");
     exit(1);
   }
-  // 用于获取输入
+  // For getting input.
   char input = 0;
-  // 第一个参数，用于语法高亮
+  // For highlighting commands.
   char arg0[1024];
   arg0[0] = '\000';
-  // 第二个参数，不会高亮
+  // Will not be highlighted.
   char arg1[1024];
   arg1[0] = '\000';
-  // 最终调用的命令
+  // Command to run after pressing Enter.
   char command[2048];
   char *output = NULL;
   output = arg0;
-  // 历史记录文件定义
+  // History file.
   FILE *history = NULL;
   char history_file[PATH_MAX];
   // Maybe it's not necessary because $HOME in termux will always be /data/data/com.termux/files/home
@@ -71,115 +133,115 @@ int main()
   }
   strcat(history_file, home);
   strcat(history_file, "/.container_history");
-  // 要读的行号
+  // The line to read, count from bottom to top.
+  unsigned int lines = 0;
+  // Will be total lines-lines, because we should read the file from the top.
   unsigned int line_to_read = 0;
-  // 最终为行数-行号(因为是正着读文件，行号却是倒数)
-  unsigned int total_lines = 0;
-  // 当前行号减1
+  // Line number.
   unsigned int line_now = 0;
-  // 立即捕获输入，不等待回车
+  // Catch the input, do not wait for Enter.
   system("stty -icanon");
-  // 关闭输入显示
+  // Disable displaying inputs.
   system("stty -echo");
-  // 用于删除键捕获
+  // For catching erase key.
   system("stty erase '^h'");
-  // 处理ctrl-c信号
+  // Catch CTRL-C signel and restart.
   signal(SIGINT, restart);
-  // console循环
+  // Console
   printf("\n\033[1;38;2;254;228;208mConsole > \033[0m");
   while (true)
   {
-    // 获取一个字符
+    // Get a char in input.
     input = (char)getchar();
     switch (input)
     {
-    // EOF捕获，即ctrl-d
+    // Get CTRL-D(EOF).
     case '\004':
-      // 还原终端设置并退出
+      // Reset terminal configs and exit.
       system("stty erase '^?'");
       system("stty icanon");
       system("stty echo");
       printf("\n");
       exit(0);
-    // 上下键捕获
+    // Up/down key.
     case '\033':
-      // 忽略`[`符号
+      // Ignore `[`.
       getchar();
       switch (getchar())
       {
-      // 上键
+      // Up key.
       case 'A':
-        // 当前行号
         line_now = 0;
         for (unsigned int i = 0; i < (strlen(arg0) + strlen(arg1)); i++)
         {
-          // 退格并覆盖字符显示
+          // Clear commands to show.
           printf("\b");
           printf(" ");
           printf("\b");
         }
+        // Open history file.
         history = fopen(history_file, "a+e");
-        // 回到文件头
+        // Back to the head of file.
         fseek(history, 0, SEEK_SET);
         arg0[0] = '\000';
         arg1[0] = '\000';
         output = arg0;
-        // 统计行数
-        total_lines = 0;
+        // Count down lines.
+        line_to_read = 0;
         for (int i = 0; (i = fgetc(history)) != EOF;)
         {
           if (i == '\n')
           {
-            total_lines++;
+            line_to_read++;
           }
         }
-        // 修复空文件读取
-        if (total_lines == 0)
+        // Fix errors if the history file is empty.
+        if (line_to_read == 0)
         {
           goto end;
         }
-        // 设置要读的行号
-        if (total_lines > line_to_read)
+        // Set the line to read.
+        if (line_to_read > lines)
         {
-          line_to_read++;
-          total_lines = total_lines - line_to_read;
+          lines++;
+          line_to_read = line_to_read - lines;
         }
         else
         {
-          total_lines = 0;
+          line_to_read = 0;
         }
-        // 回到文件头
+        // Back to the head of file.
         fseek(history, 0, SEEK_SET);
-        // 逐字符读取历史文件
+        // Per-character read history file.
         while (true)
         {
           input = (char)fgetc(history);
           switch (input)
           {
-          // 换行符(统计行号)
+          // Count lines.
           case '\n':
-            // 到达要读的行
-            if (line_now == total_lines)
+            // Reached the line to read.
+            if (line_now == line_to_read)
             {
-              // 结束读取
+              // Finish reading.
               fclose(history);
               goto end;
             }
             else
             {
-              // 行号加一
+              // Increase line number.
               line_now++;
               continue;
             }
             break;
-          // 空格用于分割arg0和arg1
+          // Space, for spliting arg0 and arg1.
           case ' ':
-            // 判断是否写入arg1
-            if (line_now == total_lines)
+            // Check if we should write to arg1
+            if (line_now == line_to_read)
             {
               if (arg0[0] != '\000')
               {
-                // 判断是否需要切换到arg1
+                // If we should switch output to arg1
                 if (arg1[0] == '\000')
                 {
                   output = arg1;
@@ -188,12 +250,13 @@ int main()
               }
             }
             break;
-          // 空字符，忘了干啥的了反正能跑
+          // I don't remember what's it.
+          // At least it really works, so do not touch.
           case '\000':
             break;
           default:
-            // 写入数据
-            if (line_now == total_lines)
+            // Write to output.
+            if (line_now == line_to_read)
             {
               strcat(output, &input);
               break;
@@ -202,76 +265,64 @@ int main()
         }
       end:
         break;
-        // 下键
+        // Down key.
       case 'B':
-        // 当前行号
         line_now = 0;
         for (unsigned int i = 0; i < (strlen(arg0) + strlen(arg1)); i++)
         {
-          // 退格并覆盖字符显示
           printf("\b");
           printf(" ");
           printf("\b");
         }
-        if (line_to_read > 1)
+        if (lines > 1)
         {
-          line_to_read--;
+          lines--;
         }
         else
         {
-          line_to_read = 1;
+          lines = 1;
         }
         history = fopen(history_file, "a+e");
-        // 回到文件头
         fseek(history, 0, SEEK_SET);
         arg0[0] = '\000';
         arg1[0] = '\000';
         output = arg0;
-        // 统计行数
-        total_lines = 0;
+        line_to_read = 0;
         for (int i = 0; (i = fgetc(history)) != EOF;)
         {
           if (i == '\n')
           {
-            total_lines++;
+            line_to_read++;
           }
         }
-        // 修复空文件读取
-        if (total_lines == 0)
+        if (line_to_read == 0)
         {
           goto end1;
         }
-        // 设置要读的行号
-        total_lines = total_lines - line_to_read;
-        // 回到文件头
+        line_to_read = line_to_read - lines;
         fseek(history, 0, SEEK_SET);
         while (true)
         {
           input = (char)fgetc(history);
           switch (input)
           {
-          // 换行符
           case '\n':
-            if (line_now == total_lines)
+            if (line_now == line_to_read)
             {
-              // 结束读取
               fclose(history);
               goto end1;
             }
             else
             {
-              // 行号加一
               line_now++;
               continue;
             }
             break;
           case ' ':
-            // 判断是否写入arg1
-            if (line_now == total_lines)
+            if (line_now == line_to_read)
             {
               if (arg0[0] != '\000')
               {
-                // 判断是否需要切换到arg1
                 if (arg1[0] == '\000')
                 {
                   output = arg1;
@@ -283,8 +334,7 @@ int main()
           case '\000':
             break;
           default:
-            // 写入数据
-            if (line_now == total_lines)
+            if (line_now == line_to_read)
             {
               strcat(output, &input);
               break;
@@ -294,16 +344,15 @@ int main()
       }
     end1:
       break;
-    // 删除键
+    // Backspace.
     case 127:
-      // 判断是否写入arg1
+      // Check if we should write to arg1.
       if (arg1[0] == '\000')
       {
         if (strlen(output) > 0)
         {
-          // 删除一个字符
+          // Del a character.
           output[strlen(output) - 1] = '\000';
-          // 退格并覆盖字符显示
           printf("\b");
           printf(" ");
           printf("\b");
@@ -311,12 +360,10 @@ int main()
       }
       else
       {
-        // 判断是否切换到arg0
+        // Check if we should switch output to arg0
         if (strlen(output) > 0)
         {
-          // 删除一个字符
           output[strlen(output) - 1] = '\000';
-          // 退格并覆盖字符显示
           printf("\b");
           printf(" ");
           printf("\b");
@@ -324,52 +371,49 @@ int main()
         else
         {
           output = arg0;
-          // 删除一个字符
           output[strlen(output) - 1] = '\000';
-          // 退格并覆盖字符显示
           printf("\b");
           printf(" ");
           printf("\b");
         }
       }
       break;
-    // 回车
+    // Enter.
     case '\n':
-      // exit命令执行
+      // `exit` command, same as CTRL-D
       if (strcmp(arg0, "exit") == 0)
       {
-        // 还原终端设置并退出
         system("stty erase '^?'");
         system("stty icanon");
         system("stty echo");
         printf("\n");
         exit(0);
       }
-      // 合成最终执行命令
+      // Get the command to run.
       strcat(command, "container -e CONTAINER_CONSOLE_MAIN ");
       strcat(command, arg0);
       strcat(command, arg1);
       printf("\n");
-      // 执行命令
+      // Execute the command.
       system(command);
-      // 写入记录
+      // Write to history file.
       history = fopen(history_file, "a+e");
       fprintf(history, "%s%s%s", arg0, arg1, "\n");
       fclose(history);
-      // 恢复默认值
+      // Reset all variables to default values.
       arg0[0] = '\000';
       arg1[0] = '\000';
       command[0] = '\000';
-      line_to_read = 0;
+      lines = 0;
       output = arg0;
       printf("\033[1;38;2;254;228;208mConsole > \033[0m");
       break;
     // 空格
     case ' ':
-      // 删除行首空格
+      // Ignore spaces at the beginning of the line.
       if (arg0[0] != '\000')
       {
-        // 判断是否需要切换到arg1
+        // Check if we should switch output to arg1.
         if (arg1[0] == '\000')
         {
           output = arg1;
@@ -381,12 +425,12 @@ int main()
         }
       }
       break;
-    // 其他字符输入
+    // Other characters(common characters).
     default:
       strcat(output, &input);
       break;
     }
-    // 内置语法高亮，不考虑扩展性故直接用最简单的写法
+    // Highlighting, very very shit code here.
     if (strcmp(arg0, "help") == 0 || strcmp(arg0, "exit") == 0 || strcmp(arg0, "new") == 0 || strcmp(arg0, "search") == 0 || strcmp(arg0, "pull") == 0 || strcmp(arg0, "rmi") == 0 || strcmp(arg0, "cp") == 0 || strcmp(arg0, "ls") == 0 || strcmp(arg0, "rm") == 0 || strcmp(arg0, "login") == 0 || strcmp(arg0, "import") == 0 || strcmp(arg0, "export") == 0 || strcmp(arg0, "info") == 0)
     {
       printf("\033[11G\033[1;38;2;166;227;161m%s\033[0m%s", arg0, arg1);
