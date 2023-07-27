@@ -390,7 +390,7 @@ int main(int argc, char *argv[])
         exit(0);
       }
       // Get the command to run.
-      strcat(command, "container -e CONTAINER_CONSOLE_MAIN ");
+      strcat(command, "container -e container_console_main ");
       strcat(command, arg0);
       strcat(command, arg1);
       printf("\n");
