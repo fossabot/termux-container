@@ -93,7 +93,6 @@ int main(int argc, char *argv[])
    * 100% shit-code here...
    * At least it works...
    */
-  // XXX
   // Used for termux-container.
   if (argc > 1)
   {

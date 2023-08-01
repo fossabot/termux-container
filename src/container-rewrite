@@ -25,6 +25,55 @@ RGB_COLOR="254;228;208"
 export COLOR="\033[1;38;2;${RGB_COLOR}m"
 # I18N.
 export GETTEXT='gettext termux-container'
+# A very cute catgirl nya~~~
+export CAT1="\n${COLOR}  .^.   .^.
+  /⋀\_ﾉ_/⋀\\
+ /ﾉｿﾉ\ﾉｿ丶)|
+|ﾙﾘﾘ >   )ﾘ
+ﾉノ㇏ Ｖ ﾉ|ﾉ
+      ⠁⠁"
+export CAT2="${COLOR}  .^.   .^.
+  /⋀\_ﾉ_/⋀\\
+ /ﾉｿﾉ\ﾉｿ丶)|
+|ﾙﾘﾘ >   )ﾘ
+ﾉノ㇏  ^ ﾉ|ﾉ
+      ⠁⠁"
+export CAT3="${COLOR}  .^.   .^.
+  /⋀\_ﾉ_/⋀\\
+ /ﾉｿﾉ\ﾉｿ丶)|
+|ﾙﾘﾘ >   )ﾘ
+ﾉノ㇏ ぁ ﾉ|ﾉ
+      ⠁⠁"
+export CAT4="${COLOR}  .^.   .^.
+  /⋀\_ﾉ_/⋀\\
+ /ﾉｿﾉ\ﾉｿ丶)|
+|ﾙﾘﾘ >   )ﾘ
+ﾉノ㇏ の ﾉ|ﾉ
+      ⠁⠁"
+export CAT5="${COLOR}  .^.   .^.
+  /⋀\_ﾉ_/⋀\\
+ /ﾉｿﾉ\ﾉｿ丶)|
+|ﾙﾘﾘ >   )ﾘ
+ﾉノ㇏ ヮ ﾉ|ﾉ
+      ⠁⠁"
+export CAT6="${COLOR}  .^.   .^.
+  /⋀\_ﾉ_/⋀\\
+ /ﾉｿﾉ\ﾉｿ丶)|
+|ﾙﾘﾘ >   )ﾘ
+ﾉノ㇏ ++ ﾉ|ﾉ
+      ⠁⠁"
+export CAT7="${COLOR}  .^.   .^.
+  /⋀\_ﾉ_/⋀\\
+ /ﾉｿﾉ\ﾉｿ丶)|
+|ﾙﾘﾘ >   )ﾘ
+ﾉノ㇏ xx ﾉ|ﾉ
+      ⠁⠁"
+export CAT8="${COLOR}  .^.   .^.
+  /⋀\_ﾉ_/⋀\\
+ /ﾉｿﾉ\ﾉｿ丶)|
+|ﾙﾘﾘ >   )ﾘ
+ﾉノ㇏ ひ ﾉ|ﾉ
+      ⠁⠁"
 # Help page for container-console.
 function console_help() {
   echo -e "${COLOR}$(${GETTEXT} "Usage:")"
@@ -71,8 +120,9 @@ function show_info() {
   echo -e "[] $(${GETTEXT} "Author")                : Moe-hacker"
   echo -e "[] $(${GETTEXT} "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[] $(${GETTEXT} "Version")               : ${TERMUX_CONTAINER_VERSION}"
-  echo -e "[] $(${GETTEXT} "ruri Version") : $(ruri -v | head -1 | awk '{print $2}')"
+  echo -e "[] $(${GETTEXT} "ruri Version") : $(ruri -v | head -2 | awk '{print $2}')"
   echo -e "[] $(${GETTEXT} "ruri License") : MIT"
+  # Learned from moby's check-config.sh.
   kernelVersion="$(uname -r)"
   kernelMajor="${kernelVersion%%.*}"
   kernelMinor="${kernelVersion#$kernelMajor.}"
@@ -254,6 +304,7 @@ function get_cpu_arch() {
   *) echo -e "\033[31m$(${GETTEXT} "Unknow cpu architecture for this device !")\033[0m" && exit 1 ;;
   esac
 }
+# Just like `docker rmi`?
 function remove_image() {
   OS=$1
   VERSION=$2
@@ -267,6 +318,7 @@ function remove_image() {
     echo -e "\033[31m$(${GETTEXT} "Error: Rootfs does not exist !")${COLOR}"
   fi
 }
+# Unpack the rootfs and fix bugs on Android.
 function create_chroot_container() {
   ROOTFS=$1
   CONTAINER_DIR=$2
@@ -278,19 +330,19 @@ function create_chroot_container() {
     return 1
   fi
   pv $PREFIX/var/container/$ROOTFS | tar -xJf - -C ${CONTAINER_DIR}
-  #修复su二进制的文件权限
+  # Fix permission of /bin/su
   chown root:root ${CONTAINER_DIR}/bin/su
   chmod 777 ${CONTAINER_DIR}/bin/su
-  #创建不存在的系统目录
+  # Create mountpoints.
   [[ -e ${CONTAINER_DIR}/dev ]] || mkdir ${CONTAINER_DIR}/dev
   [[ -e ${CONTAINER_DIR}/proc ]] || mkdir ${CONTAINER_DIR}/proc
   [[ -e ${CONTAINER_DIR}/sys ]] || mkdir ${CONTAINER_DIR}/sys
   [[ -e ${CONTAINER_DIR}/sdcard ]] || mkdir ${CONTAINER_DIR}/sdcard
-  #自动修复dns
+  # Fix dns problem.
   rm -f ${CONTAINER_DIR}/etc/resolv.conf >>/dev/null 2>&1
   echo nameserver 8.8.8.8 >>${CONTAINER_DIR}/etc/resolv.conf
   echo nameserver 114.114.114.114 >>${CONTAINER_DIR}/etc/resolv.conf
-  #解决联网问题
+  # Fix network problem.
   cp $PREFIX/share/termux-container/group_add.sh ${CONTAINER_DIR}/tmp
   chmod 777 ${CONTAINER_DIR}/tmp/group_add.sh
   if [[ ${NEW_USER} != "" && ${PASSWORD} != "" ]]; then
@@ -306,16 +358,10 @@ function create_chroot_container() {
   umount -lvf ${CONTAINER_DIR}/sys >>/dev/null 2>&1
   umount -lvf ${CONTAINER_DIR}/proc >>/dev/null 2>&1
   umount -lvf ${CONTAINER_DIR} >>/dev/null 2>&1
-  x="\n${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏ Ｖ ﾉ|ﾉ
-      ⠁⠁"
-  printf "$x\n"
+  printf "${CAT1}\n"
   echo -e "$(${GETTEXT} "Creation done.")\n"
 }
-#proot容器创建
+# Just like above.
 function create_proot_container() {
   ROOTFS=$1
   CONTAINER_DIR=$2
@@ -347,15 +393,10 @@ function create_proot_container() {
     COMMAND+=" -q qemu-${CROSS_ARCH}"
   fi
   ${COMMAND} /tmp/group_add.sh >>/dev/null 2>&1
-  x="\n${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏ Ｖ ﾉ|ﾉ
-      ⠁⠁"
-  printf "$x\n"
+  printf "${CAT1}\n"
   echo -e "$(${GETTEXT} "Creation done.")\n"
 }
+# Called by `-e` option with sudo.
 function run_chroot_container() {
   if [[ ! -e $PREFIX/bin/ruri ]]; then
     echo -e "\033[31m$(${GETTEXT} "Error: Can not find ruri installed !")${COLOR}"
@@ -413,12 +454,16 @@ function run_chroot_container() {
   if [[ ${MOUNT_SDCARD} == "true" ]]; then
     mount --bind -o ro /sdcard ${CONTAINER_DIR}/sdcard
   fi
-  #直接挂载termux的tmp
+  # Mount termux's tmpdir.
   mount --bind ${PREFIX}/tmp ${CONTAINER_DIR}/tmp
-  #解决sudo提示nosuid挂载无法使用
+  # Fix nosuid error of sudo.
   mount -o remount,suid /data >>/dev/null 2>&1
   CONTAINER_PARAMETER="-w"
   if [[ ${ENABLE_UNSHARE} == "true" ]]; then
+    # Run rurid if it's not running.
+    if ! ruri -w -t; then
+      ruri -D
+    fi
     CONTAINER_PARAMETER+=" -u"
   fi
   if [[ ${PRIVAGE_LEVEL} == "0" ]]; then
@@ -428,8 +473,7 @@ function run_chroot_container() {
   fi
   printf "\033[0m"
   unset LD_PRELOAD
-  # Use ruri instead of chroot/unshare.
-  # XXX
+  # Use ruri instead of chroot/unshare command.
   ruri ${CONTAINER_PARAMETER} ${CONTAINER_DIR}
 }
 function run_proot_container() {
@@ -494,7 +538,7 @@ function run_proot_container() {
   if [[ ${CROSS_ARCH} != "null" ]]; then
     COMMAND+=" -q qemu-${CROSS_ARCH}"
   fi
-  #挂载伪文件，提取自Redmi 10X 5G，老古董了
+  # From Redmi 10X 5G, I hope it works.
   COMMAND+=" --mount=$PREFIX/share/termux-container/proc/buddyinfo:/proc/buddyinfo"
   COMMAND+=" --mount=$PREFIX/share/termux-container/proc/cgroups:/proc/cgroups"
   COMMAND+=" --mount=$PREFIX/share/termux-container/proc/consoles:/proc/consoles"
@@ -526,12 +570,13 @@ function run_proot_container() {
   COMMAND+=" --mount=$PREFIX/share/termux-container/proc/vmallocinfo:/proc/vmallocinfo"
   COMMAND+=" --mount=$PREFIX/share/termux-container/proc/vmstat:/proc/vmstat"
   COMMAND+=" --mount=$PREFIX/share/termux-container/proc/zoneinfo:/proc/zoneinfo"
-  #挂载termux的tmp目录
+  # Mount termux's tmpdir.
   COMMAND+=" --mount=$PREFIX/tmp:/tmp"
   COMMAND+=" /bin/su - root"
   printf "\033[0m"
   ${COMMAND}
 }
+# Just call to other functions.
 function run_container() {
   CONTAINER_NAME=$1
   if [[ -e $PREFIX/etc/container/proot/container-${CONTAINER_NAME}.conf ]]; then
@@ -882,52 +927,22 @@ function container_console_main() {
     RANDOM_NUM=$(((RANDOM_NUM % 6)))
     case $RANDOM_NUM in
     "1")
-      x="${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏  ^ ﾉ|ﾉ
-      ⠁⠁"
+      x=${CAT2}
       ;;
     "2")
-      x="${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏ ぁ ﾉ|ﾉ
-      ⠁⠁"
+      x=${CAT3}
       ;;
     "3")
-      x="${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏ の ﾉ|ﾉ
-      ⠁⠁"
+      x=${CAT4}
       ;;
     "4")
-      x="${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏ ヮ ﾉ|ﾉ
-      ⠁⠁"
+      x=${CAT5}
       ;;
     "5")
-      x="${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏ ++ ﾉ|ﾉ
-      ⠁⠁"
+      x=${CAT6}
       ;;
     "0")
-      x="${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏ xx ﾉ|ﾉ
-      ⠁⠁"
+      x=${CAT7}
       ;;
     esac
     printf "$x\n"
@@ -938,13 +953,7 @@ function container_console_main() {
 function container_console() {
   # It has been rewritten with C.
   container-console
-  x="${COLOR}  .^.   .^.
-  /⋀\_ﾉ_/⋀\\
- /ﾉｿﾉ\ﾉｿ丶)|
-|ﾙﾘﾘ >   )ﾘ
-ﾉノ㇏ ひ ﾉ|ﾉ
-      ⠁⠁
-Bye, nya~"
+  x="${CAT8}\nBye, nya~"
   printf "$x\n"
 }
 function remove_container() {
@@ -1204,7 +1213,7 @@ case $1 in
 "-e") EXEC_FUNCTION ${@:2} ;;
 "-b") CONTAINER_BUILD $2 ;;
 "cp") CONTAINER_CP $2 $3 ;;
-#无效参数,用作和console的接口
+# Invalid function, just to check if termux-container exists.
 "-t") exit 0 ;;
 "") CONSOLE_GREETING && CONTAINER_CONSOLE ;;
 *) CONTAINER_CONSOLE_MAIN ${@:1} ;;
