@@ -1208,13 +1208,12 @@ function easy_mode() {
 }
 # All functions start here.
 case $1 in
-"-h") SHOW_USAGE ;;
-"-E") EASY_MODE ;;
-"-e") EXEC_FUNCTION ${@:2} ;;
-"-b") CONTAINER_BUILD $2 ;;
-"cp") CONTAINER_CP $2 $3 ;;
+"-h") script_help ;;
+"-E") easy_mode ;;
+"-e") exec_function ${@:2} ;;
+"cp") container_cp $2 $3 ;;
 # Invalid function, just to check if termux-container exists.
 "-t") exit 0 ;;
-"") CONSOLE_GREETING && CONTAINER_CONSOLE ;;
-*) CONTAINER_CONSOLE_MAIN ${@:1} ;;
+"") container_console ;;
+*) container_console_main ${@:1} ;;
 esac
