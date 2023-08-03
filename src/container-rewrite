@@ -190,6 +190,26 @@ function container_cp() {
     return
   fi
 }
+# Most of the code were rewritten to rootfstool.
+function pull_rootfs() {
+  #TODO
+  OS=$1
+  VERSION=$2
+  printf "${COLOR}"
+  if [[ $3 = "" ]]; then
+    get_cpu_arch
+  else
+    CPU_ARCH=$3
+  fi
+  if [[ -e $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz ]]; then
+    echo -e "\033[31m$(${GETTEXT} "Error: Rootfs already exists !")${COLOR}"
+    return 1
+  fi
+  if [[ $OS == "manjaro" ]]; then
+    get_manjaro_rootfs
+    return 0
+  fi
+}
 # These code has been kept because I haven't added them to rootfstool.
 function get_manjaro_rootfs() {
   proot -0 rm -rf $PREFIX/tmp/container
@@ -908,19 +928,19 @@ function exec_function() {
 # Parse command from container-console.
 function container_console_main() {
   case $1 in
-  "help") SHOW_HELPS ;;
-  "search") SEARCH_IMAGES $2 $3 ;;
-  "login") RUN_CONTAINER $2 ;;
-  "pull") PULL_ROOTFS $2 $3 $4 ;;
-  "import") IMPORT_ROOTFS $2 ;;
-  "export") EXPORT_CONTAINER $2 ;;
-  "new") CONTAINER_NEW ;;
-  "ls") LIST ;;
+  "help") console_help ;;
+  "search") search_images $2 $3 ;;
+  "login") run_container $2 ;;
+  "pull") pull_rootfs $2 $3 $4 ;;
+  "import") import_rootfs $2 ;;
+  "export") export_container $2 ;;
+  "new") create_new_container ;;
+  "ls") container_list ;;
   "exit") echo -e "\nExit.\033[0m" && exit ;;
-  "rmi") REMOVE_IMAGE $2 $3 $4 ;;
-  "rm") REMOVE_CONTAINER $2 ;;
-  "cp") CONTAINER_CP $2 $3 ;;
-  "info") SHOW_INFO ;;
+  "rmi") remove_image $2 $3 $4 ;;
+  "rm") remove_container $2 ;;
+  "cp") container_cp $2 $3 ;;
+  "info") show_info ;;
   "") return ;;
   *)
     RANDOM_NUM=$RANDOM
