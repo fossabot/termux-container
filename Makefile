@@ -68,4 +68,7 @@ clean:
 	@printf "        ⠁⠁\n"
 	@printf "\033[1;38;2;254;228;208m[*] Cleaned Up.\033[0m\n"
 help :
-	@echo "Makefile is not for common user, please use the released .deb files instead."
+	@echo "Available commands:"
+	@echo "make build    :Just build"
+	@echo "make install  :Build and install"
+	@echo "make pack-deb :Build .deb package"

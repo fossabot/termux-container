@@ -20,7 +20,7 @@
 // This file should be statically compiled.
 #include "container-console.h"
 // Used for catching Ctrl-C, restart container-console.
-void restart(int)
+void restart(int /*unused*/)
 {
   // Restart container-console.
   system("container-console");
@@ -407,7 +407,7 @@ int main(int argc, char *argv[])
       output = arg0;
       printf("\033[1;38;2;254;228;208mConsole > \033[0m");
       break;
-    // 空格
+    // Space key.
     case ' ':
       // Ignore spaces at the beginning of the line.
       if (arg0[0] != '\000')
