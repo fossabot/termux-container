@@ -23,8 +23,6 @@ export TERMUX_CONTAINER_LICENSE="Apache-2.0"
 # Output main color.
 RGB_COLOR="254;228;208"
 export COLOR="\033[1;38;2;${RGB_COLOR}m"
-# I18N.
-export GETTEXT='gettext termux-container'
 # A very cute catgirl nya~~~
 export CAT1="\n${COLOR}  .^.   .^.
   /⋀\_ﾉ_/⋀\\
@@ -74,22 +72,41 @@ export CAT8="${COLOR}  .^.   .^.
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏ ひ ﾉ|ﾉ
       ⠁⠁"
+# i18n
+po_get() {
+  # Since termux does not support multiple languages,
+  # the *.mo files seems not works.
+  # So termux-container directly uses the *.po files
+  # for translation.
+  # NOTE:
+  # This function only supports the *.po files created with --no-wrap option.
+  PO_FILE="$PREFIX/share/termux-container/lang/container-${TERMUX_CONTAINER_LANGUAGE}.po"
+  msg=$(grep -A 1 "\"$1\"" ${PO_FILE} | tail -1)
+  if [[ ${msg} == "" ]]; then
+    printf $1
+    return 1
+  fi
+  msg=${msg#msgstr\ }
+  msg=${msg#\"}
+  msg=${msg%\"}
+  printf "${msg}"
+}
 # Help page for container-console.
 function console_help() {
-  echo -e "${COLOR}$(${GETTEXT} "Usage:")"
-  echo "  $(${GETTEXT} "help                       :Show this page.")"
-  echo "  $(${GETTEXT} "exit                       :Exit console.")"
-  echo "  $(${GETTEXT} "new                        :Create a new container.")"
-  echo "  $(${GETTEXT} "search [all/OS] (Arch)     :Search for images.")"
-  echo "  $(${GETTEXT} "pull [OS] [Version] (Arch) :Download image,just save.")"
-  echo "  $(${GETTEXT} "rmi [OS] [Version] (Arch)  :Remove an image.")"
-  echo "  $(${GETTEXT} "cp [Name:Path] [Path]      :Copy files,like docker cp.")"
-  echo "  $(${GETTEXT} "ls                         :List containers and images.")"
-  echo "  $(${GETTEXT} "rm [Name]                  :Remove a container.")"
-  echo "  $(${GETTEXT} "login [Name]               :Login to the container.")"
-  echo "  $(${GETTEXT} "import [Image File]        :Import an image.")"
-  echo "  $(${GETTEXT} "export [Name]              :Export a container as an image.")"
-  echo "  $(${GETTEXT} "info                       :Show version info.")"
+  echo -e "${COLOR}$(po_get "Usage:")"
+  echo "  $(po_get "help                       :Show this page.")"
+  echo "  $(po_get "exit                       :Exit console.")"
+  echo "  $(po_get "new                        :Create a new container.")"
+  echo "  $(po_get "search [all/OS] (Arch)     :Search for images.")"
+  echo "  $(po_get "pull [OS] [Version] (Arch) :Download image,just save.")"
+  echo "  $(po_get "rmi [OS] [Version] (Arch)  :Remove an image.")"
+  echo "  $(po_get "cp [Name:Path] [Path]      :Copy files,like docker cp.")"
+  echo "  $(po_get "ls                         :List containers and images.")"
+  echo "  $(po_get "rm [Name]                  :Remove a container.")"
+  echo "  $(po_get "login [Name]               :Login to the container.")"
+  echo "  $(po_get "import [Image File]        :Import an image.")"
+  echo "  $(po_get "export [Name]              :Export a container as an image.")"
+  echo "  $(po_get "info                       :Show version info.")"
 }
 # In fact it's very very very useless.
 # But it's cool, isn't it?
@@ -116,12 +133,12 @@ function show_info() {
   echo
   echo -e "${COLOR}//"
   echo
-  echo -e "\n$(${GETTEXT} "Script Info :")"
-  echo -e "[] $(${GETTEXT} "Author")                : Moe-hacker"
-  echo -e "[] $(${GETTEXT} "License")               : ${TERMUX_CONTAINER_LICENSE}"
-  echo -e "[] $(${GETTEXT} "Version")               : ${TERMUX_CONTAINER_VERSION}"
-  echo -e "[] $(${GETTEXT} "ruri Version") : $(ruri -v | head -2 | awk '{print $2}')"
-  echo -e "[] $(${GETTEXT} "ruri License") : MIT"
+  echo -e "\n$(po_get "Script Info :")"
+  echo -e "[] $(po_get "Author")                : Moe-hacker"
+  echo -e "[] $(po_get "License")               : ${TERMUX_CONTAINER_LICENSE}"
+  echo -e "[] $(po_get "Version")               : ${TERMUX_CONTAINER_VERSION}"
+  echo -e "[] $(po_get "ruri Version") : $(ruri -v | head -2 | awk '{print $2}')"
+  echo -e "[] $(po_get "ruri License") : MIT"
   # Learned from moby's check-config.sh.
   kernelVersion="$(uname -r)"
   kernelMajor="${kernelVersion%%.*}"
@@ -129,32 +146,32 @@ function show_info() {
   kernelMinor="${kernelMinor%%.*}"
   kernelPatch="${kernelVersion#*$kernelMinor.}"
   kernelPatch="${kernelPatch%%-*}"
-  echo -e "\n$(${GETTEXT} "System info") :"
-  echo -e "[] $(${GETTEXT} "Kernel Version")        : $kernelMajor.$kernelMinor.$kernelPatch"
+  echo -e "\n$(po_get "System info") :"
+  echo -e "[] $(po_get "Kernel Version")        : $kernelMajor.$kernelMinor.$kernelPatch"
   if [[ ${TERMUX_VERSION} != "" ]]; then
-    echo -e "[] $(${GETTEXT} "Termux Version")        : ${TERMUX_VERSION}"
+    echo -e "[] $(po_get "Termux Version")        : ${TERMUX_VERSION}"
   fi
-  echo -e "[] $(${GETTEXT} "Username")              : $(whoami)"
-  echo -e "[] $(${GETTEXT} "Android Version")       : $(getprop ro.build.version.release)"
-  echo -e "[] $(${GETTEXT} "Cpu Architecture")      : $(uname -m)"
-  echo -e "[] $(${GETTEXT} "Hostname")              : $(hostname)"
-  echo -e "[] $(${GETTEXT} "Uptime")                : $(uptime -p)"
+  echo -e "[] $(po_get "Username")              : $(whoami)"
+  echo -e "[] $(po_get "Android Version")       : $(getprop ro.build.version.release)"
+  echo -e "[] $(po_get "Cpu Architecture")      : $(uname -m)"
+  echo -e "[] $(po_get "Hostname")              : $(hostname)"
+  echo -e "[] $(po_get "Uptime")                : $(uptime -p)"
   # Note: `su -c` will not work properly with kernelSU.
   if [[ -e /bin/magisk ]]; then
-    echo -e "[] $(${GETTEXT} "Magisk version")        : $(su -c /bin/magisk -V)"
-    echo -e "[] $(${GETTEXT} "SELinux")               : $(sudo getenforce)"
+    echo -e "[] $(po_get "Magisk version")        : $(su -c /bin/magisk -V)"
+    echo -e "[] $(po_get "SELinux")               : $(sudo getenforce)"
   fi
-  echo -e "\n$(${GETTEXT} "Hardware info") :"
-  echo -e "[] $(${GETTEXT} "Brand")                 : $(getprop ro.product.brand)"
-  echo -e "[] $(${GETTEXT} "Model")                 : $(getprop ro.product.model)"
-  echo -e "[] $(${GETTEXT} "Model Codename")        : $(getprop ro.product.board)"
-  echo -e "[] $(${GETTEXT} "Platform Codename")     : $(getprop ro.board.platform)"
-  echo -e "[] $(${GETTEXT} "Cpus")                  : $(lscpu | grep CPU\(s\)\: | awk '{print $2}')"
-  echo -e "[] $(${GETTEXT} "Total Memory")          : $(free -g --si | grep "Mem" | awk {'print $2'})GB"
+  echo -e "\n$(po_get "Hardware info") :"
+  echo -e "[] $(po_get "Brand")                 : $(getprop ro.product.brand)"
+  echo -e "[] $(po_get "Model")                 : $(getprop ro.product.model)"
+  echo -e "[] $(po_get "Model Codename")        : $(getprop ro.product.board)"
+  echo -e "[] $(po_get "Platform Codename")     : $(getprop ro.board.platform)"
+  echo -e "[] $(po_get "Cpus")                  : $(lscpu | grep CPU\(s\)\: | awk '{print $2}')"
+  echo -e "[] $(po_get "Total Memory")          : $(free -g --si | grep "Mem" | awk {'print $2'})GB"
   _temp=$(cat /sys/class/thermal/thermal_zone0/temp)
   temp=$(echo $_temp | cut -c 1-2)
   temp+=".$(echo $_temp | cut -c 3)"
-  echo -e "[] $(${GETTEXT} "Temperature")           : ${temp}°C"
+  echo -e "[] $(po_get "Temperature")           : ${temp}°C"
   echo
 }
 # Just like the command `docker cp`.
@@ -186,7 +203,7 @@ function container_cp() {
       sudo cp ${HOST_PATH} ${CONTAINER_DIR}${CONTAINER_PATH}
     fi
   else
-    echo -e "\033[31m$(${GETTEXT} "Error: container does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: container does not exist !")${COLOR}"
     return
   fi
 }
@@ -202,7 +219,7 @@ function pull_rootfs() {
     CPU_ARCH=$3
   fi
   if [[ -e $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz ]]; then
-    echo -e "\033[31m$(${GETTEXT} "Error: Rootfs already exists !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Rootfs already exists !")${COLOR}"
     return 1
   fi
   if [[ $OS == "manjaro" ]]; then
@@ -321,7 +338,7 @@ function get_cpu_arch() {
   aarch64 | arm64* | armv8* | arm*) export CPU_ARCH="arm64" ;;
   i*86 | x86) export CPU_ARCH="i386" ;;
   x86_64 | amd64) export CPU_ARCH="amd64" ;;
-  *) echo -e "\033[31m$(${GETTEXT} "Unknow cpu architecture for this device !")\033[0m" && exit 1 ;;
+  *) echo -e "\033[31m$(po_get "Unknow cpu architecture for this device !")\033[0m" && exit 1 ;;
   esac
 }
 # Just like `docker rmi`?
@@ -335,7 +352,7 @@ function remove_image() {
   if [[ -e $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz ]]; then
     rm -fv $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz
   else
-    echo -e "\033[31m$(${GETTEXT} "Error: Rootfs does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Rootfs does not exist !")${COLOR}"
   fi
 }
 # Unpack the rootfs and fix bugs on Android.
@@ -346,7 +363,7 @@ function create_chroot_container() {
   PASSWORD=$4
   printf "${COLOR}"
   if ! mkdir -p ${CONTAINER_DIR}; then
-    echo -e "\033[31m$(${GETTEXT} "Error: Failed to create container directory !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Failed to create container directory !")${COLOR}"
     return 1
   fi
   pv $PREFIX/var/container/$ROOTFS | tar -xJf - -C ${CONTAINER_DIR}
@@ -379,7 +396,7 @@ function create_chroot_container() {
   umount -lvf ${CONTAINER_DIR}/proc >>/dev/null 2>&1
   umount -lvf ${CONTAINER_DIR} >>/dev/null 2>&1
   printf "${CAT1}\n"
-  echo -e "$(${GETTEXT} "Creation done.")\n"
+  echo -e "$(po_get "Creation done.")\n"
 }
 # Just like above.
 function create_proot_container() {
@@ -390,7 +407,7 @@ function create_proot_container() {
   PASSWORD=$5
   printf "${COLOR}"
   if ! mkdir -p ${CONTAINER_DIR}; then
-    echo -e "\033[31m$(${GETTEXT} "Failed to create container directory !")${COLOR}"
+    echo -e "\033[31m$(po_get "Failed to create container directory !")${COLOR}"
     return 1
   fi
   pv $PREFIX/var/container/$ROOTFS | proot -0 -l tar -xJf - -C ${CONTAINER_DIR}
@@ -414,17 +431,17 @@ function create_proot_container() {
   fi
   ${COMMAND} /tmp/group_add.sh >>/dev/null 2>&1
   printf "${CAT1}\n"
-  echo -e "$(${GETTEXT} "Creation done.")\n"
+  echo -e "$(po_get "Creation done.")\n"
 }
 # Called by `-e` option with sudo.
 function run_chroot_container() {
   if [[ ! -e $PREFIX/bin/ruri ]]; then
-    echo -e "\033[31m$(${GETTEXT} "Error: Can not find ruri installed !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Can not find ruri installed !")${COLOR}"
     return 1
   fi
   CONTAINER_NAME=$1
   if [[ ! -e $PREFIX/etc/container/chroot/container-${CONTAINER_NAME}.conf ]]; then
-    echo -e "\033[31m$(${GETTEXT} "Error: Container does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Container does not exist !")${COLOR}"
     return 1
   fi
   source $PREFIX/etc/container/chroot/container-${CONTAINER_NAME}.conf
@@ -467,7 +484,7 @@ function run_chroot_container() {
     echo -e ""
   fi
   if [[ ! -e ${CONTAINER_DIR} ]]; then
-    echo -e "\033[31m$(${GETTEXT} "Error: Container directory does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Container directory does not exist !")${COLOR}"
     return 1
   fi
   [[ -e ${CONTAINER_DIR}/sdcard ]] || mkdir -p ${CONTAINER_DIR}/sdcard
@@ -499,7 +516,7 @@ function run_chroot_container() {
 function run_proot_container() {
   CONTAINER_NAME=$1
   if [[ ! -e $PREFIX/etc/container/proot/container-${CONTAINER_NAME}.conf ]]; then
-    echo -e "\033[31m$(${GETTEXT} "Error: Container does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Container does not exist !")${COLOR}"
     return 1
   fi
   source $PREFIX/etc/container/proot/container-${CONTAINER_NAME}.conf
@@ -538,7 +555,7 @@ function run_proot_container() {
     echo -e ""
   fi
   if [[ ! -e ${CONTAINER_DIR} ]]; then
-    echo -e "\033[31m$(${GETTEXT} "Error: Container directory does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Container directory does not exist !")${COLOR}"
     return 1
   fi
   unset LD_PRELOAD
@@ -607,7 +624,7 @@ function run_container() {
       return
     fi
   else
-    echo -e "\033[31m$(${GETTEXT} "Error: container does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: container does not exist !")${COLOR}"
     return
   fi
 }
@@ -615,9 +632,9 @@ function create_new_container() {
   # XXX
   GET_CPU_ARCH
   echo
-  echo -e "${COLOR}$(${GETTEXT} "Enter the name of this container.")"
+  echo -e "${COLOR}$(po_get "Enter the name of this container.")"
   while :; do
-    read -p "[] $(${GETTEXT} "Name > ")" CONTAINER_NAME
+    read -p "[] $(po_get "Name > ")" CONTAINER_NAME
     if [[ $? != 0 ]]; then
       echo
       return 1
@@ -627,16 +644,16 @@ function create_new_container() {
         echo
         break
       else
-        echo -e "\033[31m$(${GETTEXT} "Error: container name already in use !")${COLOR}"
+        echo -e "\033[31m$(po_get "Error: container name already in use !")${COLOR}"
       fi
     fi
   done
-  echo -e "$(${GETTEXT} "If your phone is rooted,it is recommand to run container with chroot mode.If not or you want to run cross-arch container,please choose proot.")"
-  echo -e "$(${GETTEXT} "Chroot mode will use ruri for unshare feature and capability reduse to make the container more secure,see:\n\033[4mhttps://github.com/Moe-hacker/ruri\033[0m${COLOR}")"
-  echo -e "$(${GETTEXT} "Before you use it,you should allow the MIT License of it:\n\033[4mhttps://github.com/Moe-hacker/ruri/blob/main/LICENSE\033[0m${COLOR}")"
-  echo -e "\n$(${GETTEXT} "Enter the type of this container.")"
+  echo -e "$(po_get "If your phone is rooted,it is recommand to run container with chroot mode.If not or you want to run cross-arch container,please choose proot.")"
+  echo -e "$(po_get "Chroot mode will use ruri for unshare feature and capability reduse to make the container more secure,see:\n\033[4mhttps://github.com/Moe-hacker/ruri\033[0m${COLOR}")"
+  echo -e "$(po_get "Before you use it,you should allow the MIT License of it:\n\033[4mhttps://github.com/Moe-hacker/ruri/blob/main/LICENSE\033[0m${COLOR}")"
+  echo -e "\n$(po_get "Enter the type of this container.")"
   while :; do
-    read -p "[] $(${GETTEXT} "Type [chroot/proot] > ")" CONTAINER_TYPE
+    read -p "[] $(po_get "Type [chroot/proot] > ")" CONTAINER_TYPE
     if [[ $? != 0 ]]; then
       echo
       return 1
@@ -646,9 +663,9 @@ function create_new_container() {
     fi
   done
   if [[ ${CONTAINER_TYPE} == "chroot" ]]; then
-    echo -e "\n$(${GETTEXT} "Unshare mode will use namespace features of Linux kernel to provide more security,but some devices may crash after using it.")\n"
+    echo -e "\n$(po_get "Unshare mode will use namespace features of Linux kernel to provide more security,but some devices may crash after using it.")\n"
     while :; do
-      read -p "[] $(${GETTEXT} "Enable unshare [true/false] > ")" ENABLE_UNSHARE
+      read -p "[] $(po_get "Enable unshare [true/false] > ")" ENABLE_UNSHARE
       if [[ $? != 0 ]]; then
         echo
         return 1
@@ -657,9 +674,9 @@ function create_new_container() {
         break
       fi
     done
-    echo -e "\n$(${GETTEXT} "The privilege level determines the privileges that the container can get. 0 is the lowest and 2 is the highest.Lower privileges can make the container more secure,but operations like mount will not be authorized in the container.It's recommended to set it to 1.")\n"
+    echo -e "\n$(po_get "The privilege level determines the privileges that the container can get. 0 is the lowest and 2 is the highest.Lower privileges can make the container more secure,but operations like mount will not be authorized in the container.It's recommended to set it to 1.")\n"
     while :; do
-      read -p "[] $(${GETTEXT} "Privilege level [0-2] > ")" PRIVAGE_LEVEL
+      read -p "[] $(po_get "Privilege level [0-2] > ")" PRIVAGE_LEVEL
       if [[ $? != 0 ]]; then
         echo
         return 1
@@ -669,11 +686,11 @@ function create_new_container() {
       fi
     done
   else
-    echo -e "\n$(${GETTEXT} "You can use qemu to simulate another CPU architecture to run containers,however,the performance is not ideal.")"
-    echo -e "$(${GETTEXT} "Available CPU architectures are:") arm64 armhf amd64 i386 m68k ppc ppc64el riscv32 riscv64"
-    echo -e "$(${GETTEXT} "If you don't want to use qemu,just press Enter here.")\n"
+    echo -e "\n$(po_get "You can use qemu to simulate another CPU architecture to run containers,however,the performance is not ideal.")"
+    echo -e "$(po_get "Available CPU architectures are:") arm64 armhf amd64 i386 m68k ppc ppc64el riscv32 riscv64"
+    echo -e "$(po_get "If you don't want to use qemu,just press Enter here.")\n"
     while :; do
-      read -p "[] $(${GETTEXT} "CPU architecture") > " CPU_ARCH
+      read -p "[] $(po_get "CPU architecture") > " CPU_ARCH
       if [[ $? != 0 ]]; then
         echo
         return 1
@@ -703,9 +720,9 @@ function create_new_container() {
       esac
     done
   fi
-  echo -e "\n$(${GETTEXT} "You can mount /sdcard to the container to share files in your phone.However,it's not a secure way.It's recommended to use \`container cp\` instead.")\n"
+  echo -e "\n$(po_get "You can mount /sdcard to the container to share files in your phone.However,it's not a secure way.It's recommended to use \`container cp\` instead.")\n"
   while :; do
-    read -p "[] $(${GETTEXT} "Mount sdcard [true/false]") > " MOUNT_SDCARD
+    read -p "[] $(po_get "Mount sdcard [true/false]") > " MOUNT_SDCARD
     if [[ $? != 0 ]]; then
       echo
       return 1
@@ -714,9 +731,9 @@ function create_new_container() {
       break
     fi
   done
-  echo -e "\n$(${GETTEXT} "You can create a new common user in the container.If you don't want it,just press Enter here.")\n"
+  echo -e "\n$(po_get "You can create a new common user in the container.If you don't want it,just press Enter here.")\n"
   while :; do
-    read -p "[] $(${GETTEXT} "Username") > " NEW_USER
+    read -p "[] $(po_get "Username") > " NEW_USER
     if [[ $? != 0 ]]; then
       echo
       return 1
@@ -725,7 +742,7 @@ function create_new_container() {
   done
   if [[ ${NEW_USER} != "" ]]; then
     while :; do
-      read -p "[] $(${GETTEXT} "Password") > " PASSWORD
+      read -p "[] $(po_get "Password") > " PASSWORD
       if [[ $? != 0 ]]; then
         echo
         return 1
@@ -735,21 +752,21 @@ function create_new_container() {
       fi
     done
   fi
-  echo -e "\n$(${GETTEXT} "The container absolute path is the directory used to store the container,for chroot,you can use /data/container-name,and for proot,you can use /data/data/com.termux/files/home/container-name,but do not use directory in /sdcard,or you might run into problems !")\n"
-  echo -e "$(${GETTEXT} "Enter the absolute path of container.")"
+  echo -e "\n$(po_get "The container absolute path is the directory used to store the container,for chroot,you can use /data/container-name,and for proot,you can use /data/data/com.termux/files/home/container-name,but do not use directory in /sdcard,or you might run into problems !")\n"
+  echo -e "$(po_get "Enter the absolute path of container.")"
   while :; do
-    read -p "[] $(${GETTEXT} "Container path") > " CONTAINER_DIR
+    read -p "[] $(po_get "Container path") > " CONTAINER_DIR
     if [[ $? != 0 ]]; then
       echo
       return 1
     fi
     if [[ -e ${CONTAINER_DIR} ]]; then
-      echo -e "\033[31m$(${GETTEXT} "Error: container directory already exist !")${COLOR}"
+      echo -e "\033[31m$(po_get "Error: container directory already exist !")${COLOR}"
       continue
     fi
     for BLACKLIST in {/bin/,/dev/,/odm/,/oem/,/proc/,/product/,/sys/,/system/,/vendor/}; do
       if [[ ${CONTAINER_DIR} = $BLACKLIST* ]]; then
-        echo -e "\033[31m$(${GETTEXT} "Error: refuse to use system directory !")${COLOR}"
+        echo -e "\033[31m$(po_get "Error: refuse to use system directory !")${COLOR}"
         CONTINUE=true
       fi
     done
@@ -757,15 +774,15 @@ function create_new_container() {
       continue
     fi
     if [[ ${CONTAINER_DIR:0:1} != "/" ]]; then
-      echo -e "\033[31m$(${GETTEXT} "Error: please use absolute path !")${COLOR}"
+      echo -e "\033[31m$(po_get "Error: please use absolute path !")${COLOR}"
       continue
     else
       break
     fi
   done
-  echo -e "\n$(${GETTEXT} "Choose the OS and the version to install,you can use \`search\` command here.")"
+  echo -e "\n$(po_get "Choose the OS and the version to install,you can use \`search\` command here.")"
   while :; do
-    read -p "[] $(${GETTEXT} "OS") > " OS
+    read -p "[] $(po_get "OS") > " OS
     if [[ $? != 0 ]]; then
       echo
       return 1
@@ -778,7 +795,7 @@ function create_new_container() {
     if [[ ${OS} != "" ]]; then
       while :; do
         printf "${COLOR}"
-        read -p "[] $(${GETTEXT} "Vesion") > " VERSION
+        read -p "[] $(po_get "Vesion") > " VERSION
         if [[ $? != 0 ]]; then
           echo
           return 1
@@ -794,23 +811,23 @@ function create_new_container() {
       break
     fi
   done
-  echo -e "$(${GETTEXT} "Before creating the container,you need to make sure the config is all right:")"
+  echo -e "$(po_get "Before creating the container,you need to make sure the config is all right:")"
   if [[ ${CONTAINER_TYPE} == "chroot" ]]; then
-    echo -e "$(${GETTEXT} "Type")            : chroot"
-    echo -e "$(${GETTEXT} "Enable unshare")  : ${ENABLE_UNSHARE}"
-    echo -e "$(${GETTEXT} "Privilege level") : ${PRIVAGE_LEVEL}"
+    echo -e "$(po_get "Type")            : chroot"
+    echo -e "$(po_get "Enable unshare")  : ${ENABLE_UNSHARE}"
+    echo -e "$(po_get "Privilege level") : ${PRIVAGE_LEVEL}"
   else
-    echo -e "$(${GETTEXT} "Type")            : proot"
-    echo -e "$(${GETTEXT} "Cross-arch")      : ${CROSS_ARCH}"
+    echo -e "$(po_get "Type")            : proot"
+    echo -e "$(po_get "Cross-arch")      : ${CROSS_ARCH}"
   fi
-  echo -e "$(${GETTEXT} "Name")            : ${CONTAINER_NAME}"
-  echo -e "$(${GETTEXT} "Container path")  : ${CONTAINER_DIR}"
-  echo -e "$(${GETTEXT} "New user")        : ${NEW_USER}"
-  echo -e "$(${GETTEXT} "Password")        : ${PASSWORD}"
-  echo -e "$(${GETTEXT} "OS")              : ${OS}"
-  echo -e "$(${GETTEXT} "Version")         : ${VERSION}"
-  echo -e "$(${GETTEXT} "Mount sdcard")    : ${MOUNT_SDCARD}"
-  read -p "$(${GETTEXT} "Continue") [y/n] " CONTINUE
+  echo -e "$(po_get "Name")            : ${CONTAINER_NAME}"
+  echo -e "$(po_get "Container path")  : ${CONTAINER_DIR}"
+  echo -e "$(po_get "New user")        : ${NEW_USER}"
+  echo -e "$(po_get "Password")        : ${PASSWORD}"
+  echo -e "$(po_get "OS")              : ${OS}"
+  echo -e "$(po_get "Version")         : ${VERSION}"
+  echo -e "$(po_get "Mount sdcard")    : ${MOUNT_SDCARD}"
+  read -p "$(po_get "Continue") [y/n] " CONTINUE
   if [[ ${CONTINUE} == "n" ]]; then
     return 1
   fi
@@ -829,8 +846,8 @@ function create_new_container() {
 }
 function container_list() {
   echo
-  echo -e "${COLOR}$(${GETTEXT} "Images:")"
-  echo -e "$(${GETTEXT} "OS:Version:Arch")"
+  echo -e "${COLOR}$(po_get "Images:")"
+  echo -e "$(po_get "OS:Version:Arch")"
   echo -e "================"
   if [[ -e $PREFIX/var/container ]]; then
     for IMAGE in $(ls $PREFIX/var/container); do
@@ -844,8 +861,8 @@ function container_list() {
   fi
   echo
   echo
-  echo -e "$(${GETTEXT} "Containers:")"
-  echo -e "$(${GETTEXT} "Type:Name")"
+  echo -e "$(po_get "Containers:")"
+  echo -e "$(po_get "Type:Name")"
   echo -e "================"
   if [[ -e $PREFIX/etc/container/proot ]]; then
     for CONTAINER in $(ls $PREFIX/etc/container/proot); do
@@ -876,12 +893,12 @@ function export_container() {
       return
     fi
   else
-    echo -e "\033[31m$(${GETTEXT} "Error: container does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: container does not exist !")${COLOR}"
     return
   fi
   FILE=/sdcard/${OS}-${CPU_ARCH}-${CROSS_ARCH}-${CONTAINER_NAME}-$(date +%y%m%d%H%M%S).tar.xz
   if ! cd ${CONTAINER_DIR}; then
-    echo -e "\033[31m$(${GETTEXT} "Error: container directory does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: container directory does not exist !")${COLOR}"
     return
   fi
   printf "${COLOR}"
@@ -890,12 +907,12 @@ function export_container() {
   else
     proot -l tar -JPpcvf ${FILE} .
   fi
-  echo -e "$(${GETTEXT} "Export done, file:") ${FILE}"
+  echo -e "$(po_get "Export done, file:") ${FILE}"
 }
 function import_rootfs() {
   FILE=$1
   if [[ ! -e ${FILE} ]]; then
-    echo -e "\033[31m$(${GETTEXT} "Error: rootfs file does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: rootfs file does not exist !")${COLOR}"
     return 1
   fi
   while :; do
@@ -915,7 +932,7 @@ function import_rootfs() {
     if [[ ${VERSION} != "" ]] && [[ ! -e $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz ]]; then
       break
     else
-      echo -e "\033[31m$(${GETTEXT} "Error: OS version already in use !")${COLOR}"
+      echo -e "\033[31m$(po_get "Error: OS version already in use !")${COLOR}"
     fi
   done
   cp ${FILE} $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz
@@ -966,7 +983,7 @@ function container_console_main() {
       ;;
     esac
     printf "$x\n"
-    echo -e "\033[31m$(${GETTEXT} "Error: Unknow command \`$@\`,type \`help\` to show helps.")\033[0m${COLOR}"
+    echo -e "\033[31m$(po_get "Error: Unknow command \`$@\`,type \`help\` to show helps.")\033[0m${COLOR}"
     ;;
   esac
 }
@@ -981,12 +998,12 @@ function remove_container() {
   if [[ -e $PREFIX/etc/container/proot/container-${CONTAINER_NAME}.conf ]]; then
     source $PREFIX/etc/container/proot/container-${CONTAINER_NAME}.conf
     echo -e "${COLOR}======================================="
-    echo -e "$(${GETTEXT} "Name")                : ${CONTAINER_NAME}"
-    echo -e "$(${GETTEXT} "OS")                  : ${OS}"
-    echo -e "$(${GETTEXT} "TYPE")                : proot"
-    echo -e "$(${GETTEXT} "Container directory") : ${CONTAINER_DIR}"
+    echo -e "$(po_get "Name")                : ${CONTAINER_NAME}"
+    echo -e "$(po_get "OS")                  : ${OS}"
+    echo -e "$(po_get "TYPE")                : proot"
+    echo -e "$(po_get "Container directory") : ${CONTAINER_DIR}"
     echo
-    read -p "$(${GETTEXT} "Press Enter to remove this container or CTRL-C to exit.")"
+    read -p "$(po_get "Press Enter to remove this container or CTRL-C to exit.")"
     chmod -Rv 777 ${CONTAINER_DIR}
     rm -rfv ${CONTAINER_DIR}
     rm -v $PREFIX/etc/container/proot/container-${CONTAINER_NAME}.conf
@@ -998,12 +1015,12 @@ function remove_container() {
     fi
     source $PREFIX/etc/container/chroot/container-${CONTAINER_NAME}.conf
     echo -e "======================================="
-    echo -e "$(${GETTEXT} "Name")                : ${CONTAINER_NAME}"
-    echo -e "$(${GETTEXT} "OS")                  : ${OS}"
-    echo -e "$(${GETTEXT} "TYPE")                : chroot"
-    echo -e "$(${GETTEXT} "Container directory") : ${CONTAINER_DIR}"
+    echo -e "$(po_get "Name")                : ${CONTAINER_NAME}"
+    echo -e "$(po_get "OS")                  : ${OS}"
+    echo -e "$(po_get "TYPE")                : chroot"
+    echo -e "$(po_get "Container directory") : ${CONTAINER_DIR}"
     echo
-    read -p "$(${GETTEXT} "Press Enter to remove this container or CTRL-C to exit.")"
+    read -p "$(po_get "Press Enter to remove this container or CTRL-C to exit.")"
     for i in {0..10}; do
       umount -lvf ${CONTAINER_DIR}/dev >>/dev/null 2>&1
       umount -lvf ${CONTAINER_DIR}/sys >>/dev/null 2>&1
@@ -1013,29 +1030,29 @@ function remove_container() {
       umount -lvf ${CONTAINER_DIR} >>/dev/null 2>&1
     done
     if mountpoint -q ${CONTAINER_DIR}/sdcard; then
-      echo -e "\033[31m$(${GETTEXT} "Error: can not umount container at this time !")${COLOR}"
+      echo -e "\033[31m$(po_get "Error: can not umount container at this time !")${COLOR}"
       return 1
     fi
     if mountpoint -q ${CONTAINER_DIR}/tmp; then
-      echo -e "\033[31m$(${GETTEXT} "Error: can not umount container at this time !")${COLOR}"
+      echo -e "\033[31m$(po_get "Error: can not umount container at this time !")${COLOR}"
       return 1
     fi
     if mountpoint -q ${CONTAINER_DIR}/dev; then
-      echo -e "\033[31m$(${GETTEXT} "Error: can not umount container at this time !")${COLOR}"
+      echo -e "\033[31m$(po_get "Error: can not umount container at this time !")${COLOR}"
       return 1
     fi
     if mountpoint -q ${CONTAINER_DIR}/sys; then
-      echo -e "\033[31m$(${GETTEXT} "Error: can not umount container at this time !")${COLOR}"
+      echo -e "\033[31m$(po_get "Error: can not umount container at this time !")${COLOR}"
       return 1
     fi
     if mountpoint -q ${CONTAINER_DIR}/proc; then
-      echo -e "\033[31m$(${GETTEXT} "Error: can not umount container at this time !")${COLOR}"
+      echo -e "\033[31m$(po_get "Error: can not umount container at this time !")${COLOR}"
       return 1
     fi
     rm -rvf ${CONTAINER_DIR}
     rm -v $PREFIX/etc/container/chroot/container-${CONTAINER_NAME}.conf
   else
-    echo -e "\033[31m$(${GETTEXT} "Error: container does not exist !")${COLOR}"
+    echo -e "\033[31m$(po_get "Error: container does not exist !")${COLOR}"
     return
   fi
 }
@@ -1062,13 +1079,13 @@ function script_help() {
   echo
   echo -e "${COLOR}//"
   echo
-  echo -e "$(${GETTEXT} "Usage:")"
-  echo -e " $(${GETTEXT} "container                       #Start container console.")"
-  echo -e " $(${GETTEXT} "container -h                    #Show this page.")"
-  echo -e " $(${GETTEXT} "container cp [Name:Path] [Path] #Copy files,like docker cp.")"
-  echo -e " $(${GETTEXT} "container -i [Image File]       #Import an image.")"
-  echo -e " $(${GETTEXT} "container -E                    #Easy mode.")"
-  echo -e " $(${GETTEXT} "container -e [Function]         #Exec function in this script *NOT for user.")"
+  echo -e "$(po_get "Usage:")"
+  echo -e " $(po_get "container                       #Start container console.")"
+  echo -e " $(po_get "container -h                    #Show this page.")"
+  echo -e " $(po_get "container cp [Name:Path] [Path] #Copy files,like docker cp.")"
+  echo -e " $(po_get "container -i [Image File]       #Import an image.")"
+  echo -e " $(po_get "container -E                    #Easy mode.")"
+  echo -e " $(po_get "container -e [Function]         #Exec function in this script *NOT for user.")"
 }
 ##############
 ##TODO
@@ -1076,14 +1093,14 @@ function script_help() {
 function easy_create() {
   trap "exit" SIGINT
   WIDTH=$(($(stty size | awk '{print $2}') - 8))
-  if whiptail --title "[] $(${GETTEXT} "RUN MODE")" --yes-button "chroot" --no-button "proot" --yesno "$(${GETTEXT} "if your phone is rooted,it is recommand to run container with chroot mode")\n$(${GETTEXT} "If not ,please choose proot")\n\n$(${GETTEXT} "Please choose your run mode:")" 12 $WIDTH; then
+  if whiptail --title "[] $(po_get "RUN MODE")" --yes-button "chroot" --no-button "proot" --yesno "$(po_get "if your phone is rooted,it is recommand to run container with chroot mode")\n$(po_get "If not ,please choose proot")\n\n$(po_get "Please choose your run mode:")" 12 $WIDTH; then
     TYPE=chroot
   else
     TYPE=proot
   fi
   LIST="1 alpine 2 archlinux 3 centos 4 debian 5 fedora 6 kali 7 manjaro 8 opensuse 9 parrot 10 ubuntu"
   LIST2="alpine archlinux centos debian fedora kali manjaro opensuse parrot ubuntu"
-  NUMBER=$(whiptail --title "[] $(${GETTEXT} "OS")" --menu "$(${GETTEXT} "Choose the OS to install:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
+  NUMBER=$(whiptail --title "[] $(po_get "OS")" --menu "$(po_get "Choose the OS to install:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
   OS=$(echo $LIST2 | awk "{print \$$NUMBER}")
   unset LIST LIST2 NUMBER
   if [[ ${OS} != "parrot" ]] && [[ ${OS} != "manjaro" ]]; then
@@ -1094,7 +1111,7 @@ function easy_create() {
       LIST2+="$VERSION "
     done
     unset VERSION NUMBER
-    NUMBER=$(whiptail --title "[] $(${GETTEXT} "VERSION")" --menu "$(${GETTEXT} "Choose the version to install:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
+    NUMBER=$(whiptail --title "[] $(po_get "VERSION")" --menu "$(po_get "Choose the version to install:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
     VERSION=$(echo $LIST2 | awk "{print \$$NUMBER}")
   fi
   GET_CPU_ARCH
@@ -1102,7 +1119,7 @@ function easy_create() {
     PULL_ROOTFS ${OS} ${VERSION} ${CPU_ARCH}
   fi
   if [[ -e /data/data/com.termux/files/home/${TYPE}-${OS}-${VERSION}_${CPU_ARCH} ]]; then
-    echo -e "$(${GETTEXT} "Error: container already installed")"
+    echo -e "$(po_get "Error: container already installed")"
     return 1
   fi
   if [[ ${TYPE} == "chroot" ]]; then
@@ -1142,10 +1159,10 @@ function easy_remove() {
   fi
   unset CONTAINER NUMBER
   if [[ $LIST == "" ]]; then
-    whiptail --title "[] $(${GETTEXT} "ERROR")" --msgbox "$(${GETTEXT} "No container created!")" 7 $WIDTH
+    whiptail --title "[] $(po_get "ERROR")" --msgbox "$(po_get "No container created!")" 7 $WIDTH
     return 1
   fi
-  NUMBER=$(whiptail --title "[] CONTAINER" --menu "$(${GETTEXT} "Choose the container to remove:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
+  NUMBER=$(whiptail --title "[] CONTAINER" --menu "$(po_get "Choose the container to remove:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
   CONTAINER=$(echo $LIST2 | awk "{print \$$NUMBER}")
   REMOVE_CONTAINER "$CONTAINER"
 }
@@ -1173,10 +1190,10 @@ function easy_run() {
   fi
   unset CONTAINER NUMBER
   if [[ $LIST == "" ]]; then
-    whiptail --title "[] $(${GETTEXT} "ERROR")" --msgbox "$(${GETTEXT} "No container created!")" 7 $WIDTH
+    whiptail --title "[] $(po_get "ERROR")" --msgbox "$(po_get "No container created!")" 7 $WIDTH
     return 1
   fi
-  NUMBER=$(whiptail --title "[] CONTAINER" --menu "$(${GETTEXT} "Choose the container to run:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
+  NUMBER=$(whiptail --title "[] CONTAINER" --menu "$(po_get "Choose the container to run:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
   CONTAINER=$(echo $LIST2 | awk "{print \$$NUMBER}")
   export BE_SILENT=true
   RUN_CONTAINER $CONTAINER
@@ -1205,10 +1222,10 @@ function easy_backup() {
   fi
   unset CONTAINER NUMBER
   if [[ $LIST == "" ]]; then
-    whiptail --title "[] $(${GETTEXT} "ERROR")" --msgbox "$(${GETTEXT} "No container created!")" 7 $WIDTH
+    whiptail --title "[] $(po_get "ERROR")" --msgbox "$(po_get "No container created!")" 7 $WIDTH
     return 1
   fi
-  NUMBER=$(whiptail --title "[] CONTAINER" --menu "$(${GETTEXT} "Choose the container to backup:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
+  NUMBER=$(whiptail --title "[] CONTAINER" --menu "$(po_get "Choose the container to backup:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
   CONTAINER=$(echo $LIST2 | awk "{print \$$NUMBER}")
   EXPORT_CONTAINER $CONTAINER
 }
@@ -1219,7 +1236,7 @@ function easy_restore() {
 function easy_mode() {
   trap "exit" SIGINT
   WIDTH=$(($(stty size | awk '{print $2}') - 8))
-  OPTION=$(whiptail --title "[] TERMUX-CONTAINER" --menu "$(${GETTEXT} "Choose an operation:")" 15 $WIDTH 6 1 "$(${GETTEXT} "install")" 2 "$(${GETTEXT} "remove")" 3 "$(${GETTEXT} "run")" 3>&1 1>&2 2>&3)
+  OPTION=$(whiptail --title "[] TERMUX-CONTAINER" --menu "$(po_get "Choose an operation:")" 15 $WIDTH 6 1 "$(po_get "install")" 2 "$(po_get "remove")" 3 "$(po_get "run")" 3>&1 1>&2 2>&3)
   case $OPTION in
   1) EASY_INSTALL ;;
   2) EASY_REMOVE ;;

@@ -1,0 +1,497 @@
+# Chinese translations for PACKAGE package
+# PACKAGE 软件包的简体中文翻译.
+# Copyright (C) 2023 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# moe-hacker <moe-hacker@moe-studio>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-05 09:37-0400\n"
+"PO-Revision-Date: 2023-08-05 09:37-0400\n"
+"Last-Translator: moe-hacker <moe-hacker@moe-studio>\n"
+"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: container-rewrite:96 container-rewrite:1082
+msgid "Usage:"
+msgstr ""
+
+#: container-rewrite:97
+msgid "help                       :Show this page."
+msgstr ""
+
+#: container-rewrite:98
+msgid "exit                       :Exit console."
+msgstr ""
+
+#: container-rewrite:99
+msgid "new                        :Create a new container."
+msgstr ""
+
+#: container-rewrite:100
+msgid "search [all/OS] (Arch)     :Search for images."
+msgstr ""
+
+#: container-rewrite:101
+msgid "pull [OS] [Version] (Arch) :Download image,just save."
+msgstr ""
+
+#: container-rewrite:102
+msgid "rmi [OS] [Version] (Arch)  :Remove an image."
+msgstr ""
+
+#: container-rewrite:103
+msgid "cp [Name:Path] [Path]      :Copy files,like docker cp."
+msgstr ""
+
+#: container-rewrite:104
+msgid "ls                         :List containers and images."
+msgstr ""
+
+#: container-rewrite:105
+msgid "rm [Name]                  :Remove a container."
+msgstr ""
+
+#: container-rewrite:106
+msgid "login [Name]               :Login to the container."
+msgstr ""
+
+#: container-rewrite:107
+msgid "import [Image File]        :Import an image."
+msgstr ""
+
+#: container-rewrite:108
+msgid "export [Name]              :Export a container as an image."
+msgstr ""
+
+#: container-rewrite:109
+msgid "info                       :Show version info."
+msgstr ""
+
+#: container-rewrite:136
+msgid "Script Info :"
+msgstr ""
+
+#: container-rewrite:137
+msgid "Author"
+msgstr ""
+
+#: container-rewrite:138
+msgid "License"
+msgstr ""
+
+#: container-rewrite:139 container-rewrite:828
+msgid "Version"
+msgstr ""
+
+#: container-rewrite:140
+msgid "ruri Version"
+msgstr ""
+
+#: container-rewrite:141
+msgid "ruri License"
+msgstr ""
+
+#: container-rewrite:149
+msgid "System info"
+msgstr ""
+
+#: container-rewrite:150
+msgid "Kernel Version"
+msgstr ""
+
+#: container-rewrite:152
+msgid "Termux Version"
+msgstr ""
+
+#: container-rewrite:154 container-rewrite:736
+msgid "Username"
+msgstr ""
+
+#: container-rewrite:155
+msgid "Android Version"
+msgstr ""
+
+#: container-rewrite:156
+msgid "Cpu Architecture"
+msgstr ""
+
+#: container-rewrite:157
+msgid "Hostname"
+msgstr ""
+
+#: container-rewrite:158
+msgid "Uptime"
+msgstr ""
+
+#: container-rewrite:161
+msgid "Magisk version"
+msgstr ""
+
+#: container-rewrite:162
+msgid "SELinux"
+msgstr ""
+
+#: container-rewrite:164
+msgid "Hardware info"
+msgstr ""
+
+#: container-rewrite:165
+msgid "Brand"
+msgstr ""
+
+#: container-rewrite:166
+msgid "Model"
+msgstr ""
+
+#: container-rewrite:167
+msgid "Model Codename"
+msgstr ""
+
+#: container-rewrite:168
+msgid "Platform Codename"
+msgstr ""
+
+#: container-rewrite:169
+msgid "Cpus"
+msgstr ""
+
+#: container-rewrite:170
+msgid "Total Memory"
+msgstr ""
+
+#: container-rewrite:174
+msgid "Temperature"
+msgstr ""
+
+#: container-rewrite:206 container-rewrite:627 container-rewrite:896
+#: container-rewrite:1055
+msgid "Error: container does not exist !"
+msgstr ""
+
+#: container-rewrite:222
+msgid "Error: Rootfs already exists !"
+msgstr ""
+
+#: container-rewrite:341
+msgid "Unknow cpu architecture for this device !"
+msgstr ""
+
+#: container-rewrite:355
+msgid "Error: Rootfs does not exist !"
+msgstr ""
+
+#: container-rewrite:366
+msgid "Error: Failed to create container directory !"
+msgstr ""
+
+#: container-rewrite:399 container-rewrite:434
+msgid "Creation done."
+msgstr ""
+
+#: container-rewrite:410
+msgid "Failed to create container directory !"
+msgstr ""
+
+#: container-rewrite:439
+msgid "Error: Can not find ruri installed !"
+msgstr ""
+
+#: container-rewrite:444 container-rewrite:519
+msgid "Error: Container does not exist !"
+msgstr ""
+
+#: container-rewrite:487 container-rewrite:558
+msgid "Error: Container directory does not exist !"
+msgstr ""
+
+#: container-rewrite:635
+msgid "Enter the name of this container."
+msgstr ""
+
+#: container-rewrite:637
+msgid "Name > "
+msgstr ""
+
+#: container-rewrite:647
+msgid "Error: container name already in use !"
+msgstr ""
+
+#: container-rewrite:651
+msgid "If your phone is rooted,it is recommand to run container with chroot mode.If not or you want to run cross-arch container,please choose proot."
+msgstr ""
+
+#: container-rewrite:654
+msgid "Enter the type of this container."
+msgstr ""
+
+#: container-rewrite:656
+msgid "Type [chroot/proot] > "
+msgstr ""
+
+#: container-rewrite:666
+msgid "Unshare mode will use namespace features of Linux kernel to provide more security,but some devices may crash after using it."
+msgstr ""
+
+#: container-rewrite:668
+msgid "Enable unshare [true/false] > "
+msgstr ""
+
+#: container-rewrite:677
+msgid "The privilege level determines the privileges that the container can get. 0 is the lowest and 2 is the highest.Lower privileges can make the container more secure,but operations like mount will not be authorized in the container.It's recommended to set it to 1."
+msgstr ""
+
+#: container-rewrite:679
+msgid "Privilege level [0-2] > "
+msgstr ""
+
+#: container-rewrite:689
+msgid "You can use qemu to simulate another CPU architecture to run containers,however,the performance is not ideal."
+msgstr ""
+
+#: container-rewrite:690
+msgid "Available CPU architectures are:"
+msgstr ""
+
+#: container-rewrite:691
+msgid "If you don't want to use qemu,just press Enter here."
+msgstr ""
+
+#: container-rewrite:693
+msgid "CPU architecture"
+msgstr ""
+
+#: container-rewrite:723
+msgid "You can mount /sdcard to the container to share files in your phone.However,it's not a secure way.It's recommended to use `container cp` instead."
+msgstr ""
+
+#: container-rewrite:725
+msgid "Mount sdcard [true/false]"
+msgstr ""
+
+#: container-rewrite:734
+msgid "You can create a new common user in the container.If you don't want it,just press Enter here."
+msgstr ""
+
+#: container-rewrite:745 container-rewrite:826
+msgid "Password"
+msgstr ""
+
+#: container-rewrite:755
+msgid "The container absolute path is the directory used to store the container,for chroot,you can use /data/container-name,and for proot,you can use /data/data/com.termux/files/home/container-name,but do not use directory in /sdcard,or you might run into problems !"
+msgstr ""
+
+#: container-rewrite:756
+msgid "Enter the absolute path of container."
+msgstr ""
+
+#: container-rewrite:758 container-rewrite:824
+msgid "Container path"
+msgstr ""
+
+#: container-rewrite:764
+msgid "Error: container directory already exist !"
+msgstr ""
+
+#: container-rewrite:769
+msgid "Error: refuse to use system directory !"
+msgstr ""
+
+#: container-rewrite:777
+msgid "Error: please use absolute path !"
+msgstr ""
+
+#: container-rewrite:783
+msgid "Choose the OS and the version to install,you can use `search` command here."
+msgstr ""
+
+#: container-rewrite:785 container-rewrite:827 container-rewrite:1002
+#: container-rewrite:1019 container-rewrite:1103
+msgid "OS"
+msgstr ""
+
+#: container-rewrite:798
+msgid "Vesion"
+msgstr ""
+
+#: container-rewrite:814
+msgid "Before creating the container,you need to make sure the config is all right:"
+msgstr ""
+
+#: container-rewrite:816 container-rewrite:820
+msgid "Type"
+msgstr ""
+
+#: container-rewrite:817
+msgid "Enable unshare"
+msgstr ""
+
+#: container-rewrite:818
+msgid "Privilege level"
+msgstr ""
+
+#: container-rewrite:821
+msgid "Cross-arch"
+msgstr ""
+
+#: container-rewrite:823 container-rewrite:1001 container-rewrite:1018
+msgid "Name"
+msgstr ""
+
+#: container-rewrite:825
+msgid "New user"
+msgstr ""
+
+#: container-rewrite:829
+msgid "Mount sdcard"
+msgstr ""
+
+#: container-rewrite:830
+msgid "Continue"
+msgstr ""
+
+#: container-rewrite:849
+msgid "Images:"
+msgstr ""
+
+#: container-rewrite:850
+msgid "OS:Version:Arch"
+msgstr ""
+
+#: container-rewrite:864
+msgid "Containers:"
+msgstr ""
+
+#: container-rewrite:865
+msgid "Type:Name"
+msgstr ""
+
+#: container-rewrite:901
+msgid "Error: container directory does not exist !"
+msgstr ""
+
+#: container-rewrite:910
+msgid "Export done, file:"
+msgstr ""
+
+#: container-rewrite:915
+msgid "Error: rootfs file does not exist !"
+msgstr ""
+
+#: container-rewrite:935
+msgid "Error: OS version already in use !"
+msgstr ""
+
+#: container-rewrite:1003 container-rewrite:1020
+msgid "TYPE"
+msgstr ""
+
+#: container-rewrite:1004 container-rewrite:1021
+msgid "Container directory"
+msgstr ""
+
+#: container-rewrite:1006 container-rewrite:1023
+msgid "Press Enter to remove this container or CTRL-C to exit."
+msgstr ""
+
+#: container-rewrite:1033 container-rewrite:1037 container-rewrite:1041
+#: container-rewrite:1045 container-rewrite:1049
+msgid "Error: can not umount container at this time !"
+msgstr ""
+
+#: container-rewrite:1083
+msgid "container                       #Start container console."
+msgstr ""
+
+#: container-rewrite:1084
+msgid "container -h                    #Show this page."
+msgstr ""
+
+#: container-rewrite:1085
+msgid "container cp [Name:Path] [Path] #Copy files,like docker cp."
+msgstr ""
+
+#: container-rewrite:1086
+msgid "container -i [Image File]       #Import an image."
+msgstr ""
+
+#: container-rewrite:1087
+msgid "container -E                    #Easy mode."
+msgstr ""
+
+#: container-rewrite:1088
+msgid "container -e [Function]         #Exec function in this script *NOT for user."
+msgstr ""
+
+#: container-rewrite:1096
+msgid "RUN MODE"
+msgstr ""
+
+#: container-rewrite:1096
+msgid "if your phone is rooted,it is recommand to run container with chroot mode"
+msgstr ""
+
+#: container-rewrite:1096
+msgid "If not ,please choose proot"
+msgstr ""
+
+#: container-rewrite:1096
+msgid "Please choose your run mode:"
+msgstr ""
+
+#: container-rewrite:1103
+msgid "Choose the OS to install:"
+msgstr ""
+
+#: container-rewrite:1114
+msgid "VERSION"
+msgstr ""
+
+#: container-rewrite:1114
+msgid "Choose the version to install:"
+msgstr ""
+
+#: container-rewrite:1122
+msgid "Error: container already installed"
+msgstr ""
+
+#: container-rewrite:1162 container-rewrite:1193 container-rewrite:1225
+msgid "ERROR"
+msgstr ""
+
+#: container-rewrite:1162 container-rewrite:1193 container-rewrite:1225
+msgid "No container created!"
+msgstr ""
+
+#: container-rewrite:1165
+msgid "Choose the container to remove:"
+msgstr ""
+
+#: container-rewrite:1196
+msgid "Choose the container to run:"
+msgstr ""
+
+#: container-rewrite:1228
+msgid "Choose the container to backup:"
+msgstr ""
+
+#: container-rewrite:1239
+msgid "Choose an operation:"
+msgstr ""
+
+#: container-rewrite:1239
+msgid "install"
+msgstr ""
+
+#: container-rewrite:1239
+msgid "remove"
+msgstr ""
+
+#: container-rewrite:1239
+msgid "run"
+msgstr ""
