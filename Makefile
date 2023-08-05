@@ -67,6 +67,17 @@ clean:
 	@printf "  ﾉノ㇏ Ｖ ﾉ|ﾉ\n"
 	@printf "        ⠁⠁\n"
 	@printf "\033[1;38;2;254;228;208m[*] Cleaned Up.\033[0m\n"
+gnu-dev :
+	sudo mkdir -pv /data/data/com.termux/files
+	sudo mkdir -pv /data/data/com.termux/files/usr/bin
+	sudo mkdir -pv /data/data/com.termux/files/usr/etc
+	sudo mkdir -pv /data/data/com.termux/files/usr/var
+	sudo mkdir -pv /data/data/com.termux/files/home
+	sudo ln -svf /usr/bin/bash /data/data/com.termux/files/usr/bin/bash
+	sudo chmod -v 777 /data/data/com.termux/files/usr/bin/bash
+	sudo chmod -Rv 777 /data
+	cp -frav `realpath .` /data/data/com.termux/files/home/
+	printf "\033[1;38;2;254;228;208m[*] Go to /data/data/com.termux/files/home/termux-container for dev environment\n"
 help :
 	@echo "Available commands:"
 	@echo "make build    :Just build"
