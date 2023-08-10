@@ -74,7 +74,7 @@ export CAT8="${COLOR}  .^.   .^.
       ⠁⠁"
 # Show error message and exit.
 function error() {
-  echo -e "\033[31m$@" >&2
+  echo -e "\033[31m$@\033[0m" >&2
   exit 1
 }
 # Load configs&&check the environment.
@@ -85,6 +85,11 @@ function _init() {
   source /data/data/com.termux/files/usr/etc/container/global.conf
   if ! command -v capsh unshare chroot proot ruri; then
     error "Missing dependencies!"
+  fi
+  kernelVersion="$(uname -r)"
+  kernelMajor="${kernelVersion%%.*}"
+  if ((kernelMajor < 4)); then
+    echo -e "\033[33mWarning: termux-container has not been tested under linux 3.x or lower.\033[0m" >&2
   fi
 }
 # i18n
