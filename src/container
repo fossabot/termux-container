@@ -74,13 +74,13 @@ export CAT8="${COLOR}  .^.   .^.
       ⠁⠁"
 # Show error message and exit.
 function error() {
-  echo "\033[31m$@" >&2
+  echo -e "\033[31m$@" >&2
   exit 1
 }
 # Load configs&&check the environment.
 function _init() {
   if [[ ! -e /data/data/com.termux/files/usr/etc/container/global.conf ]]; then
-    error "\033[31mCould not find global config file!"
+    error "Could not find global config file!"
   fi
   source /data/data/com.termux/files/usr/etc/container/global.conf
   if ! command -v capsh unshare chroot proot ruri; then
@@ -455,6 +455,19 @@ function create_proot_container() {
   echo -e "$(po_getmsg "Creation done.")\n"
 }
 # Called by `-e` option with sudo.
+#XXX
+function run_ruri_container() {
+  return
+}
+function run_unshare_container() {
+  return
+}
+function run_capsh_container() {
+  return
+}
+function run_rootful_container() {
+  return
+}
 function run_chroot_container() {
   if [[ ! -e $PREFIX/bin/ruri ]]; then
     echo -e "\033[31m$(po_getmsg "Error: Can not find ruri installed !")${COLOR}"

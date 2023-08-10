@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-05 09:37-0400\n"
-"PO-Revision-Date: 2023-08-05 09:37-0400\n"
+"POT-Creation-Date: 2023-08-10 14:04-0400\n"
+"PO-Revision-Date: 2023-08-10 14:04-0400\n"
 "Last-Translator: moe-hacker <moe-hacker@moe-studio>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -17,481 +17,478 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: container-rewrite:96 container-rewrite:1082
+#: container:116 container:1103
 msgid "Usage:"
 msgstr ""
 
-#: container-rewrite:97
+#: container:117
 msgid "help                       :Show this page."
 msgstr ""
 
-#: container-rewrite:98
+#: container:118
 msgid "exit                       :Exit console."
 msgstr ""
 
-#: container-rewrite:99
+#: container:119
 msgid "new                        :Create a new container."
 msgstr ""
 
-#: container-rewrite:100
+#: container:120
 msgid "search [all/OS] (Arch)     :Search for images."
 msgstr ""
 
-#: container-rewrite:101
+#: container:121
 msgid "pull [OS] [Version] (Arch) :Download image,just save."
 msgstr ""
 
-#: container-rewrite:102
+#: container:122
 msgid "rmi [OS] [Version] (Arch)  :Remove an image."
 msgstr ""
 
-#: container-rewrite:103
+#: container:123
 msgid "cp [Name:Path] [Path]      :Copy files,like docker cp."
 msgstr ""
 
-#: container-rewrite:104
+#: container:124
 msgid "ls                         :List containers and images."
 msgstr ""
 
-#: container-rewrite:105
+#: container:125
 msgid "rm [Name]                  :Remove a container."
 msgstr ""
 
-#: container-rewrite:106
+#: container:126
 msgid "login [Name]               :Login to the container."
 msgstr ""
 
-#: container-rewrite:107
+#: container:127
 msgid "import [Image File]        :Import an image."
 msgstr ""
 
-#: container-rewrite:108
+#: container:128
 msgid "export [Name]              :Export a container as an image."
 msgstr ""
 
-#: container-rewrite:109
+#: container:129
 msgid "info                       :Show version info."
 msgstr ""
 
-#: container-rewrite:136
+#: container:156
 msgid "Script Info :"
 msgstr ""
 
-#: container-rewrite:137
+#: container:157
 msgid "Author"
 msgstr ""
 
-#: container-rewrite:138
+#: container:158
 msgid "License"
 msgstr ""
 
-#: container-rewrite:139 container-rewrite:828
+#: container:159 container:849
 msgid "Version"
 msgstr ""
 
-#: container-rewrite:140
+#: container:160
 msgid "ruri Version"
 msgstr ""
 
-#: container-rewrite:141
+#: container:161
 msgid "ruri License"
 msgstr ""
 
-#: container-rewrite:149
+#: container:169
 msgid "System info"
 msgstr ""
 
-#: container-rewrite:150
+#: container:170
 msgid "Kernel Version"
 msgstr ""
 
-#: container-rewrite:152
+#: container:172
 msgid "Termux Version"
 msgstr ""
 
-#: container-rewrite:154 container-rewrite:736
+#: container:174 container:757
 msgid "Username"
 msgstr ""
 
-#: container-rewrite:155
+#: container:175
 msgid "Android Version"
 msgstr ""
 
-#: container-rewrite:156
+#: container:176
 msgid "Cpu Architecture"
 msgstr ""
 
-#: container-rewrite:157
+#: container:177
 msgid "Hostname"
 msgstr ""
 
-#: container-rewrite:158
+#: container:178
 msgid "Uptime"
 msgstr ""
 
-#: container-rewrite:161
+#: container:181
 msgid "Magisk version"
 msgstr ""
 
-#: container-rewrite:162
+#: container:182
 msgid "SELinux"
 msgstr ""
 
-#: container-rewrite:164
+#: container:184
 msgid "Hardware info"
 msgstr ""
 
-#: container-rewrite:165
+#: container:185
 msgid "Brand"
 msgstr ""
 
-#: container-rewrite:166
+#: container:186
 msgid "Model"
 msgstr ""
 
-#: container-rewrite:167
+#: container:187
 msgid "Model Codename"
 msgstr ""
 
-#: container-rewrite:168
+#: container:188
 msgid "Platform Codename"
 msgstr ""
 
-#: container-rewrite:169
+#: container:189
 msgid "Cpus"
 msgstr ""
 
-#: container-rewrite:170
+#: container:190
 msgid "Total Memory"
 msgstr ""
 
-#: container-rewrite:174
+#: container:195
 msgid "Temperature"
 msgstr ""
 
-#: container-rewrite:206 container-rewrite:627 container-rewrite:896
-#: container-rewrite:1055
+#: container:227 container:648 container:917 container:1076
 msgid "Error: container does not exist !"
 msgstr ""
 
-#: container-rewrite:222
+#: container:243
 msgid "Error: Rootfs already exists !"
 msgstr ""
 
-#: container-rewrite:341
+#: container:362
 msgid "Unknow cpu architecture for this device !"
 msgstr ""
 
-#: container-rewrite:355
+#: container:376
 msgid "Error: Rootfs does not exist !"
 msgstr ""
 
-#: container-rewrite:366
+#: container:387
 msgid "Error: Failed to create container directory !"
 msgstr ""
 
-#: container-rewrite:399 container-rewrite:434
+#: container:420 container:455
 msgid "Creation done."
 msgstr ""
 
-#: container-rewrite:410
+#: container:431
 msgid "Failed to create container directory !"
 msgstr ""
 
-#: container-rewrite:439
+#: container:460
 msgid "Error: Can not find ruri installed !"
 msgstr ""
 
-#: container-rewrite:444 container-rewrite:519
+#: container:465 container:540
 msgid "Error: Container does not exist !"
 msgstr ""
 
-#: container-rewrite:487 container-rewrite:558
+#: container:508 container:579
 msgid "Error: Container directory does not exist !"
 msgstr ""
 
-#: container-rewrite:635
+#: container:656
 msgid "Enter the name of this container."
 msgstr ""
 
-#: container-rewrite:637
+#: container:658
 msgid "Name > "
 msgstr ""
 
-#: container-rewrite:647
+#: container:668
 msgid "Error: container name already in use !"
 msgstr ""
 
-#: container-rewrite:651
+#: container:672
 msgid "If your phone is rooted,it is recommand to run container with chroot mode.If not or you want to run cross-arch container,please choose proot."
 msgstr ""
 
-#: container-rewrite:654
+#: container:675
 msgid "Enter the type of this container."
 msgstr ""
 
-#: container-rewrite:656
+#: container:677
 msgid "Type [chroot/proot] > "
 msgstr ""
 
-#: container-rewrite:666
+#: container:687
 msgid "Unshare mode will use namespace features of Linux kernel to provide more security,but some devices may crash after using it."
 msgstr ""
 
-#: container-rewrite:668
+#: container:689
 msgid "Enable unshare [true/false] > "
 msgstr ""
 
-#: container-rewrite:677
+#: container:698
 msgid "The privilege level determines the privileges that the container can get. 0 is the lowest and 2 is the highest.Lower privileges can make the container more secure,but operations like mount will not be authorized in the container.It's recommended to set it to 1."
 msgstr ""
 
-#: container-rewrite:679
+#: container:700
 msgid "Privilege level [0-2] > "
 msgstr ""
 
-#: container-rewrite:689
+#: container:710
 msgid "You can use qemu to simulate another CPU architecture to run containers,however,the performance is not ideal."
 msgstr ""
 
-#: container-rewrite:690
+#: container:711
 msgid "Available CPU architectures are:"
 msgstr ""
 
-#: container-rewrite:691
+#: container:712
 msgid "If you don't want to use qemu,just press Enter here."
 msgstr ""
 
-#: container-rewrite:693
+#: container:714
 msgid "CPU architecture"
 msgstr ""
 
-#: container-rewrite:723
+#: container:744
 msgid "You can mount /sdcard to the container to share files in your phone.However,it's not a secure way.It's recommended to use `container cp` instead."
 msgstr ""
 
-#: container-rewrite:725
+#: container:746
 msgid "Mount sdcard [true/false]"
 msgstr ""
 
-#: container-rewrite:734
+#: container:755
 msgid "You can create a new common user in the container.If you don't want it,just press Enter here."
 msgstr ""
 
-#: container-rewrite:745 container-rewrite:826
+#: container:766 container:847
 msgid "Password"
 msgstr ""
 
-#: container-rewrite:755
+#: container:776
 msgid "The container absolute path is the directory used to store the container,for chroot,you can use /data/container-name,and for proot,you can use /data/data/com.termux/files/home/container-name,but do not use directory in /sdcard,or you might run into problems !"
 msgstr ""
 
-#: container-rewrite:756
+#: container:777
 msgid "Enter the absolute path of container."
 msgstr ""
 
-#: container-rewrite:758 container-rewrite:824
+#: container:779 container:845
 msgid "Container path"
 msgstr ""
 
-#: container-rewrite:764
+#: container:785
 msgid "Error: container directory already exist !"
 msgstr ""
 
-#: container-rewrite:769
+#: container:790
 msgid "Error: refuse to use system directory !"
 msgstr ""
 
-#: container-rewrite:777
+#: container:798
 msgid "Error: please use absolute path !"
 msgstr ""
 
-#: container-rewrite:783
+#: container:804
 msgid "Choose the OS and the version to install,you can use `search` command here."
 msgstr ""
 
-#: container-rewrite:785 container-rewrite:827 container-rewrite:1002
-#: container-rewrite:1019 container-rewrite:1103
+#: container:806 container:848 container:1023 container:1040 container:1124
 msgid "OS"
 msgstr ""
 
-#: container-rewrite:798
+#: container:819
 msgid "Vesion"
 msgstr ""
 
-#: container-rewrite:814
+#: container:835
 msgid "Before creating the container,you need to make sure the config is all right:"
 msgstr ""
 
-#: container-rewrite:816 container-rewrite:820
+#: container:837 container:841
 msgid "Type"
 msgstr ""
 
-#: container-rewrite:817
+#: container:838
 msgid "Enable unshare"
 msgstr ""
 
-#: container-rewrite:818
+#: container:839
 msgid "Privilege level"
 msgstr ""
 
-#: container-rewrite:821
+#: container:842
 msgid "Cross-arch"
 msgstr ""
 
-#: container-rewrite:823 container-rewrite:1001 container-rewrite:1018
+#: container:844 container:1022 container:1039
 msgid "Name"
 msgstr ""
 
-#: container-rewrite:825
+#: container:846
 msgid "New user"
 msgstr ""
 
-#: container-rewrite:829
+#: container:850
 msgid "Mount sdcard"
 msgstr ""
 
-#: container-rewrite:830
+#: container:851
 msgid "Continue"
 msgstr ""
 
-#: container-rewrite:849
+#: container:870
 msgid "Images:"
 msgstr ""
 
-#: container-rewrite:850
+#: container:871
 msgid "OS:Version:Arch"
 msgstr ""
 
-#: container-rewrite:864
+#: container:885
 msgid "Containers:"
 msgstr ""
 
-#: container-rewrite:865
+#: container:886
 msgid "Type:Name"
 msgstr ""
 
-#: container-rewrite:901
+#: container:922
 msgid "Error: container directory does not exist !"
 msgstr ""
 
-#: container-rewrite:910
+#: container:931
 msgid "Export done, file:"
 msgstr ""
 
-#: container-rewrite:915
+#: container:936
 msgid "Error: rootfs file does not exist !"
 msgstr ""
 
-#: container-rewrite:935
+#: container:956
 msgid "Error: OS version already in use !"
 msgstr ""
 
-#: container-rewrite:1003 container-rewrite:1020
+#: container:1024 container:1041
 msgid "TYPE"
 msgstr ""
 
-#: container-rewrite:1004 container-rewrite:1021
+#: container:1025 container:1042
 msgid "Container directory"
 msgstr ""
 
-#: container-rewrite:1006 container-rewrite:1023
+#: container:1027 container:1044
 msgid "Press Enter to remove this container or CTRL-C to exit."
 msgstr ""
 
-#: container-rewrite:1033 container-rewrite:1037 container-rewrite:1041
-#: container-rewrite:1045 container-rewrite:1049
+#: container:1054 container:1058 container:1062 container:1066 container:1070
 msgid "Error: can not umount container at this time !"
 msgstr ""
 
-#: container-rewrite:1083
+#: container:1104
 msgid "container                       #Start container console."
 msgstr ""
 
-#: container-rewrite:1084
+#: container:1105
 msgid "container -h                    #Show this page."
 msgstr ""
 
-#: container-rewrite:1085
+#: container:1106
 msgid "container cp [Name:Path] [Path] #Copy files,like docker cp."
 msgstr ""
 
-#: container-rewrite:1086
+#: container:1107
 msgid "container -i [Image File]       #Import an image."
 msgstr ""
 
-#: container-rewrite:1087
+#: container:1108
 msgid "container -E                    #Easy mode."
 msgstr ""
 
-#: container-rewrite:1088
+#: container:1109
 msgid "container -e [Function]         #Exec function in this script *NOT for user."
 msgstr ""
 
-#: container-rewrite:1096
+#: container:1117
 msgid "RUN MODE"
 msgstr ""
 
-#: container-rewrite:1096
+#: container:1117
 msgid "if your phone is rooted,it is recommand to run container with chroot mode"
 msgstr ""
 
-#: container-rewrite:1096
+#: container:1117
 msgid "If not ,please choose proot"
 msgstr ""
 
-#: container-rewrite:1096
+#: container:1117
 msgid "Please choose your run mode:"
 msgstr ""
 
-#: container-rewrite:1103
+#: container:1124
 msgid "Choose the OS to install:"
 msgstr ""
 
-#: container-rewrite:1114
+#: container:1135
 msgid "VERSION"
 msgstr ""
 
-#: container-rewrite:1114
+#: container:1135
 msgid "Choose the version to install:"
 msgstr ""
 
-#: container-rewrite:1122
+#: container:1143
 msgid "Error: container already installed"
 msgstr ""
 
-#: container-rewrite:1162 container-rewrite:1193 container-rewrite:1225
+#: container:1183 container:1214 container:1246
 msgid "ERROR"
 msgstr ""
 
-#: container-rewrite:1162 container-rewrite:1193 container-rewrite:1225
+#: container:1183 container:1214 container:1246
 msgid "No container created!"
 msgstr ""
 
-#: container-rewrite:1165
+#: container:1186
 msgid "Choose the container to remove:"
 msgstr ""
 
-#: container-rewrite:1196
+#: container:1217
 msgid "Choose the container to run:"
 msgstr ""
 
-#: container-rewrite:1228
+#: container:1249
 msgid "Choose the container to backup:"
 msgstr ""
 
-#: container-rewrite:1239
+#: container:1260
 msgid "Choose an operation:"
 msgstr ""
 
-#: container-rewrite:1239
+#: container:1260
 msgid "install"
 msgstr ""
 
-#: container-rewrite:1239
+#: container:1260
 msgid "remove"
 msgstr ""
 
-#: container-rewrite:1239
+#: container:1260
 msgid "run"
 msgstr ""
