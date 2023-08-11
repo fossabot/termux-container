@@ -96,7 +96,7 @@ function _init() {
     error "Could not find global config file!"
   fi
   source /data/data/com.termux/files/usr/etc/container/global.conf
-  if ! command -v capsh unshare chroot proot ruri; then
+  if ! command -v capsh unshare chroot proot ruri 2>&1 >/dev/null; then
     error "Missing dependencies!"
   fi
   kernelVersion="$(uname -r)"
