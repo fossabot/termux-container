@@ -115,12 +115,12 @@ function po_getmsg() {
   # This function only supports the *.po files created with --no-wrap option.
   PO_FILE="$PREFIX/share/termux-container/lang/container-${TERMUX_CONTAINER_LANGUAGE}.po"
   if [[ ! -e ${PO_FILE} ]]; then
-    printf $@
+    printf "$@"
     return 1
   fi
   msg=$(grep -A 1 "\"$@\"" ${PO_FILE} | tail -1)
   if [[ ${msg} == "" ]]; then
-    printf $@
+    printf "$@"
     return 1
   fi
   msg=${msg#msgstr\ }
@@ -178,8 +178,8 @@ function show_info() {
   echo -e "[] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
-  echo -e "[] $(po_getmsg "ruri Version") : $(ruri -v | head -2 | awk '{print $2}')"
-  echo -e "[] $(po_getmsg "ruri License") : MIT"
+  echo -e "[] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | awk '{print $2}')"
+  echo -e "[] $(po_getmsg "ruri License")          : MIT"
   # Learned from moby's check-config.sh.
   kernelVersion="$(uname -r)"
   kernelMajor="${kernelVersion%%.*}"
