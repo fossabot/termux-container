@@ -1028,7 +1028,7 @@ function container_console_main() {
 }
 function container_console() {
   # It has been rewritten with C.
-  container-console
+  container-console --greetings
   x="${CAT8}\nBye, nya~"
   printf "$x\n"
 }

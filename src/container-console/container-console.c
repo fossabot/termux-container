@@ -18,6 +18,8 @@
  *
  */
 // This file should be statically compiled.
+// It works, so don't change anything.
+// Only God knows how it works now.
 #include "container-console.h"
 // Used for catching Ctrl-C, restart container-console.
 void restart(int /*unused*/)
@@ -146,7 +148,7 @@ int main(int argc, char *argv[])
   system("stty erase '^h'");
   // Catch CTRL-C signel and restart.
   signal(SIGINT, restart);
-  // Console
+  // Console.
   printf("\n\033[1;38;2;254;228;208mConsole > \033[0m");
   while (true)
   {
