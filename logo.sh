@@ -204,3 +204,50 @@ PRESS ENTER TO CONTINUE.
 "
 printf "$license"
 read x
+clear
+col=$(($(($(stty size | awk '{print $2}'))) / 2 - 12))
+note="\033[1;38;2;254;228;208m
+\033[${col}G●   ●  ●●●  ●●●●● ●●●●● 
+\033[${col}G●●  ● ●   ●   ●   ●
+\033[${col}G● ● ● ●   ●   ●   ●●●●
+\033[${col}G●  ●● ●   ●   ●   ●
+\033[${col}G●   ●  ●●●    ●   ●●●●●
+"
+printf "$note"
+note="\033[1;38;2;254;228;208m
+
+About special characters:
+  termux-container uses special characters for a better look.
+  But not every font supports them.
+  For a test:
+  If this () is not a ubuntu logo:
+  please run:
+  mkdir -p ~/.termux
+  cp \$PREFIX/share/termux-container/font.ttf ~/.termux
+  termux-reload-settings
+
+Reporting bugs:
+  Please go to:
+  https://github.com/Moe-hacker/termux-container/discussions
+
+
+"
+printf "$note"
+printf "PRESS ENTER TO CONTINUE."
+read x
+clear
+col=$(($(($(stty size | awk '{print $2}'))) / 2 - 15))
+logo="\033[1;38;2;254;228;208m
+\033[${col}G   ●●  ●●          ●   ●  ●●
+\033[${col}G  ●      ●●         ● ●     ●
+\033[${col}G  ●        ●         ●      ●
+\033[${col}G  ●      ●●         ● ●     ●
+\033[${col}G   ●●  ●●    ●●●●● ●   ●  ●●
+
+\033[${col}G●   ● ●   ●   ●●    ●   ●  ●●●
+\033[${col}G●  ●  ●● ●●  ●  ●   ●  ●  ●   ●
+\033[${col}G●●●   ● ● ●   ●● ●  ●●●   ●
+\033[${col}G●  ●  ●   ●  ●  ●   ●  ●  ●   ●
+\033[${col}G●   ● ●   ●   ●● ●  ●   ●  ●●●
+"
+printf "$logo"
