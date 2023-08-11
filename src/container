@@ -474,19 +474,61 @@ function create_proot_container() {
 }
 # Called by `-e` option with sudo.
 #XXX
-function run_ruri_container() {
-  return
+function init_chroot_container() {
+  #setenforce 0 2>&1 >/dev/null
+  mount -o remount,suid /data
+  mount --rbind ${CONTAINER_DIR} ${CONTAINER_DIR}
+  mount -o ro,bind /sdcard ${CONTAINER_DIR}/sdcard/
+  if [[ ! -e /dev/fd ]]; then
+    ln -s /proc/self/fd /dev/ >>/dev/null 2>&1
+  fi
+  if [[ ! -e /dev/stdin ]]; then
+    ln -s /proc/self/fd/0 /dev/stdin >>/dev/null 2>&1
+  fi
+  if [[ ! -e /dev/stdout ]]; then
+    ln -s /proc/self/fd/1 /dev/stdout >>/dev/null 2>&1
+  fi
+  if [[ ! -e /dev/stderr ]]; then
+    ln -s /proc/self/fd/2 /dev/stderr >>/dev/null 2>&1
+  fi
+  if [[ ! -e /dev/tty0 ]]; then
+    ln -s /dev/null /dev/tty0 >>/dev/null 2>&1
+  fi
+  if [[ ! -e "/dev/net/tun" ]]; then
+    [[ -d /dev/net ]] || mkdir -p /dev/net >>/dev/null 2>&1
+    mknod /dev/net/tun c 10 200 >>/dev/null 2>&1
+  fi
+  if [[ ! -e /dev/shm ]]; then
+    mkdir -p /dev/shm >>/dev/null 2>&1
+    mount -o rw,nosuid,nodev,mode=1777 -t tmpfs tmpfs /dev/shm >>/dev/null 2>&1
+  fi
+  if ! mountpoint -q ${CONTAINER_DIR}/proc; then
+    mount --bind /proc ${CONTAINER_DIR}/proc >>/dev/null 2>&1
+  fi
+  if ! mountpoint -q ${CONTAINER_DIR}/sys; then
+    mount --bind /sys ${CONTAINER_DIR}/sys >>/dev/null 2>&1
+  fi
+  if ! mountpoint -q ${CONTAINER_DIR}/dev; then
+    mount --bind /dev ${CONTAINER_DIR}/dev >>/dev/null 2>&1
+  fi
+  if ! mountpoint -q ${CONTAINER_DIR}/dev/shm; then
+    mount -o bind /dev/shm ${CONTAINER_DIR}/dev/shm >>/dev/null 2>&1
+  fi
+  if ! mountpoint -q ${CONTAINER_DIR}/dev/pts; then
+    mount -o bind /dev/pts ${CONTAINER_DIR}/dev/pts >>/dev/null 2>&1
+  fi
 }
 function run_unshare_container() {
   return
 }
 function run_capsh_container() {
+  #unshare -u -p -m -i capsh --chroot=~/x --shell=/bin/su -- 
   return
 }
 function run_rootful_container() {
   return
 }
-function run_chroot_container() {
+function run_ruri_container() {
   if [[ ! -e $PREFIX/bin/ruri ]]; then
     echo -e "\033[31m$(po_getmsg "Error: Can not find ruri installed !")${COLOR}"
     return 1
@@ -682,6 +724,21 @@ function run_container() {
 }
 function create_new_container() {
   # XXX
+  x="
+┏━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━┳━━━━━━━━
+┃ container backend  ┃       ┃      ┃               ┃       ┃         ┃
+┠────────────────────┨ proot ┃ ruri ┃ capsh+unshare ┃ capsh ┃ unshare ┃ chroot 
+┃ supported feature  ┃       ┃      ┃               ┃       ┃         ┃
+┣━━━━━━━━━━━━━━━━━━━━╋━━━━━━━╋━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━╋━━━━━━━━━╋━━━━━━━━
+┃     rootless       ┃   ◯   ┃   X  ┃       X       ┃   X   ┃    X    ┃   X
+┣━━━━━━━━━━━━━━━━━━━━╋━━━━━━━╋━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━╋━━━━━━━━━╋━━━━━━━━
+┃ namespace support  ┃   X   ┃   ◯  ┃       ◯*      ┃   X   ┃    ◯*   ┃   X
+┣━━━━━━━━━━━━━━━━━━━━╋━━━━━━━╋━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━╋━━━━━━━━━╋━━━━━━━━
+┃ capability control ┃   X   ┃   ◯  ┃       ◯       ┃   ◯   ┃    X    ┃   X
+
+*capsh+unshare/unshare will not keep the same container running in the same namspaces.
+  "
+  #XXX
   GET_CPU_ARCH
   echo
   echo -e "${COLOR}$(po_getmsg "Enter the name of this container.")"
