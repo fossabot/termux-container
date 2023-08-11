@@ -16,6 +16,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+#         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
+#           ●   ●     ●   ● ●● ●● ●   ●  ● ●
+#           ●   ●●●●  ●●●●  ● ● ● ●   ●   ●
+#           ●   ●     ●  ●  ●   ● ●   ●  ● ●
+#           ●   ●●●●● ●   ● ●   ●  ●●●  ●   ●
+#
+#
+#  ●●●   ●●●  ●   ● ●●●●●   ●    ●●●  ●   ● ●●●●● ●●●●
+# ●   ● ●   ● ●●  ●   ●    ● ●    ●   ●●  ● ●     ●   ●
+# ●     ●   ● ● ● ●   ●   ●   ●   ●   ● ● ● ●●●●  ●●●●
+# ●   ● ●   ● ●  ●●   ●   ●●●●●   ●   ●  ●● ●     ●  ●
+#  ●●●   ●●●  ●   ●   ●   ●   ●  ●●●  ●   ● ●●●●● ●   ●
+
 # Version info.
 # To be 9.5 now because I rewrote it twice since 8.0.
 export TERMUX_CONTAINER_VERSION="9.5"
