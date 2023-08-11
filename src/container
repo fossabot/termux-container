@@ -178,7 +178,7 @@ function show_info() {
   echo -e "[] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
-  echo -e "[] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | awk '{print $2}')"
+  echo -e "[] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | tail -1 | awk '{print $2}')"
   echo -e "[] $(po_getmsg "ruri License")          : MIT"
   # Learned from moby's check-config.sh.
   kernelVersion="$(uname -r)"
