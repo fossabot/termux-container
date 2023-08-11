@@ -115,12 +115,12 @@ function po_getmsg() {
   # This function only supports the *.po files created with --no-wrap option.
   PO_FILE="$PREFIX/share/termux-container/lang/container-${TERMUX_CONTAINER_LANGUAGE}.po"
   if [[ ! -e ${PO_FILE} ]]; then
-    printf $1
+    printf $@
     return 1
   fi
-  msg=$(grep -A 1 "\"$1\"" ${PO_FILE} | tail -1)
+  msg=$(grep -A 1 "\"$@\"" ${PO_FILE} | tail -1)
   if [[ ${msg} == "" ]]; then
-    printf $1
+    printf $@
     return 1
   fi
   msg=${msg#msgstr\ }
