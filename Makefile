@@ -3,23 +3,25 @@ O = out
 all: show-greetings install-dependence update-code build
 show-greetings:
 	@printf "\033[1;38;2;254;228;208m"
-	@printf "                  _________\n"
-	@printf "                 /        /\\ \n"
-	@printf "                /        /  \\ \n"
-	@printf "               /        /    \\ \n"
-	@printf "              /________/      \\ \n"
-	@printf "              \\        \\      /\n"
-	@printf "               \\        \\    /\n"
-	@printf "                \\        \\  /\n"
-	@printf "                 \\________\\/\n"
-	@printf "═╔╝╔═╝╔═║╔╔ ║ ║║ ║  ╔═╝╔═║╔═ ═╔╝╔═║╝╔═ ╔═╝╔═║\n"
-	@printf " ║ ╔═╝╔╔╝║║║║ ║ ╝ ═╝║  ║ ║║ ║ ║ ╔═║║║ ║╔═╝╔╔╝\n"
-	@printf " ╝ ══╝╝ ╝╝╝╝══╝╝ ╝  ══╝══╝╝ ╝ ╝ ╝ ╝╝╝ ╝══╝╝ ╝\n\n"
+	@printf "    ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●\n"
+	@printf "      ●   ●     ●   ● ●● ●● ●   ●  ● ●\n"
+	@printf "      ●   ●●●●  ●●●●  ● ● ● ●   ●   ●\n"
+	@printf "      ●   ●     ●  ●  ●   ● ●   ●  ● ●\n"
+	@printf "      ●   ●●●●● ●   ● ●   ●  ●●●  ●   ●\n"
+	@echo
+	@echo
+	@printf " ●●●   ●●●  ●   ● ●●●●●   ●    ●●●  ●   ● ●●●●● ●●●●\n"
+	@printf "●   ● ●   ● ●●  ●   ●    ● ●    ●   ●●  ● ●     ●   ●\n"
+	@printf "●     ●   ● ● ● ●   ●   ●   ●   ●   ● ● ● ●●●●  ●●●●\n"
+	@printf "●   ● ●   ● ●  ●●   ●   ●●●●●   ●   ●  ●● ●     ●  ●\n"
+	@printf " ●●●   ●●●  ●   ●   ●   ●   ●  ●●●  ●   ● ●●●●● ●   ●\n"
+	@echo
 install-dependence:
 	@printf "\033[1;38;2;254;228;208m[+] Install dependents.\033[0m\n"&&sleep 1s
 	@pkg install ndk-multilib-native-static tsu coreutils p7zip gettext tar unzip zip git wget dpkg curl nano proot axel termux-tools util-linux pv gawk whiptail clang ndk-sysroot ndk-multilib libc-client-static libcap-static binutils	
 build :update-code
-	make -C src
+	@printf "\033[1;38;2;254;228;208m[+] Build.\033[0m\n"&&sleep 1s
+	@make -C src
 	@mkdir -pv $(O)
 	@mkdir -pv $(O)/doc/termux-container
 	@mkdir -pv $(O)/share/termux-container
@@ -31,6 +33,7 @@ build :update-code
 	@mv -v src/container-console/container-console $(O)/bin/container-console
 	@mv -v src/ruri/ruri $(O)/bin/ruri
 update-code:
+	@printf "\033[1;38;2;254;228;208m[+] Update code.\033[0m\n"&&sleep 1s
 	@git submodule update --init
 install:build
 	@printf "\033[1;38;2;254;228;208m[+] Install.\033[0m\n"&&sleep 1s

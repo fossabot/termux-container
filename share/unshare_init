@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-export PATH="/bin:/usr/bin:/usr/local/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 mount -t proc proc -o rw,nosuid,nodev,noexec,relatime /proc 2>&1 >/dev/null
 mount -t sysfs sysfs -o ro,seclabel,nosuid,nodev,noexec,relatime /sys 2>&1 >/dev/null
 mount -t tmpfs tmpfs -o rw,seclabel,nosuid,size=65536k,mode=755 /dev 2>&1 >/dev/null
