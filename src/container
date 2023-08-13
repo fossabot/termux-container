@@ -31,7 +31,7 @@
 
 # Version info.
 # To be 9.5 now because I rewrote it twice since 8.0.
-export TERMUX_CONTAINER_VERSION="9.5"
+export TERMUX_CONTAINER_VERSION="9.5-dev"
 export TERMUX_CONTAINER_LICENSE="Apache-2.0"
 # Output main color.
 RGB_COLOR="254;228;208"
@@ -175,11 +175,14 @@ function show_info() {
   echo -e "${COLOR}//"
   echo
   echo -e "\n$(po_getmsg "Script Info :")"
+  echo -e "[] $(po_getmsg "Activation stat")       : Not active"
   echo -e "[] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
-  echo -e "[] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | tail -1 | awk '{print $2}')"
+  echo -e "[\ue614] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | tail -1 | awk '{print $2}')"
   echo -e "[] $(po_getmsg "ruri License")          : MIT"
+  echo -e "[] $(po_getmsg "rootfstool Version")    : $(rootfstool version | head -1 | awk '{print $3}')"
+  echo -e "[] $(po_getmsg "rootfstool License")    : Apache-2.0"
   # Learned from moby's check-config.sh.
   kernelVersion="$(uname -r)"
   kernelMajor="${kernelVersion%%.*}"
@@ -190,7 +193,7 @@ function show_info() {
   echo -e "\n$(po_getmsg "System info") :"
   echo -e "[] $(po_getmsg "Kernel Version")        : $kernelMajor.$kernelMinor.$kernelPatch"
   if [[ ${TERMUX_VERSION} != "" ]]; then
-    echo -e "[] $(po_getmsg "Termux Version")        : ${TERMUX_VERSION}"
+    echo -e "[\ue7a2] $(po_getmsg "Termux Version")        : ${TERMUX_VERSION}"
   fi
   echo -e "[] $(po_getmsg "Username")              : $(whoami)"
   echo -e "[] $(po_getmsg "Android Version")       : $(getprop ro.build.version.release)"
