@@ -175,14 +175,14 @@ function show_info() {
   echo -e "${COLOR}//"
   echo
   echo -e "\n$(po_getmsg "Script Info :")"
-  echo -e "[\ue60a] $(po_getmsg "Activation stat")       : Not active"
+  echo -e "[\uf084] $(po_getmsg "Activation stat")       : Not active"
   echo -e "[] $(po_getmsg "Author")                : Moe-hacker"
-  echo -e "[] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
-  echo -e "[] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
+  echo -e "[\ue7c4] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
+  echo -e "[\ue6a3] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
   echo -e "[\uf1d1] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | tail -1 | awk '{print $2}')"
-  echo -e "[] $(po_getmsg "ruri License")          : MIT"
-  echo -e "[\ue614] $(po_getmsg "rootfstool Version")    : $(rootfstool version | head -1 | awk '{print $3}')"
-  echo -e "[] $(po_getmsg "rootfstool License")    : Apache-2.0"
+  echo -e "[\ue78b] $(po_getmsg "ruri License")          : MIT"
+  echo -e "[\ue796] $(po_getmsg "rootfstool Version")    : $(rootfstool version | head -1 | awk '{print $3}')"
+  echo -e "[\ue7c4] $(po_getmsg "rootfstool License")    : Apache-2.0"
   # Learned from moby's check-config.sh.
   kernelVersion="$(uname -r)"
   kernelMajor="${kernelVersion%%.*}"
@@ -203,11 +203,11 @@ function show_info() {
   # Note: `su -c` will not work properly with kernelSU.
   if [[ -e /bin/magisk ]]; then
     echo -e "[] $(po_getmsg "Magisk version")        : $(su -c /bin/magisk -V)"
-    echo -e "[] $(po_getmsg "SELinux")               : $(sudo getenforce)"
+    echo -e "[\uf132] $(po_getmsg "SELinux")               : $(sudo getenforce)"
   fi
   echo -e "\n$(po_getmsg "Hardware info") :"
-  echo -e "[\ueadb] $(po_getmsg "Brand")                 : $(getprop ro.product.brand)"
-  echo -e "[\ueadb] $(po_getmsg "Model")                 : $(getprop ro.product.model)"
+  echo -e "[\uf493] $(po_getmsg "Brand")                 : $(getprop ro.product.brand)"
+  echo -e "[\uf493] $(po_getmsg "Model")                 : $(getprop ro.product.model)"
   echo -e "[] $(po_getmsg "Model Codename")        : $(getprop ro.product.board)"
   echo -e "[] $(po_getmsg "Platform Codename")     : $(getprop ro.board.platform)"
   echo -e "[] $(po_getmsg "Cpus")                  : $(lscpu | grep CPU\(s\)\: | awk '{print $2}')"
