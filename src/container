@@ -179,7 +179,7 @@ function show_info() {
   echo -e "\n$(po_getmsg "Script Info :")"
   echo -e "[\ueb11] $(po_getmsg "Activation stat")       : Not active"
   echo -e "[\ue729] $(po_getmsg "Commit id")             : ${TERMUX_CONTAINER_COMMIT}"
-  echo -e "[\ufb42] $(po_getmsg "Author")                : Moe-hacker"
+  echo -e "[\ufd23] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[\ue7c4] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[\ueb31] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
   echo -e "[\uf1d1] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | tail -1 | awk '{print $2}')"
@@ -196,7 +196,7 @@ function show_info() {
   echo -e "\n$(po_getmsg "System info") :"
   echo -e "[] $(po_getmsg "Kernel Version")        : $kernelMajor.$kernelMinor.$kernelPatch"
   if [[ ${TERMUX_VERSION} != "" ]]; then
-    echo -e "[\ue7a2] $(po_getmsg "Termux Version")        : ${TERMUX_VERSION}"
+    echo -e "[\ufcb5] $(po_getmsg "Termux Version")        : ${TERMUX_VERSION}"
   fi
   echo -e "[] $(po_getmsg "Username")              : $(whoami)"
   echo -e "[\ufc8e] $(po_getmsg "Android Version")       : $(getprop ro.build.version.release)"
