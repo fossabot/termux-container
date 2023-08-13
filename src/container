@@ -29,10 +29,14 @@
 # ●   ● ●   ● ●  ●●   ●   ●●●●●   ●   ●  ●● ●     ●  ●
 #  ●●●   ●●●  ●   ●   ●   ●   ●  ●●●  ●   ● ●●●●● ●   ●
 
+
+# \uf0ac \ueafc   
 # Version info.
 # To be 9.5 now because I rewrote it twice since 8.0.
 export TERMUX_CONTAINER_VERSION="9.5-dev"
 export TERMUX_CONTAINER_LICENSE="Apache-2.0"
+# Will be automatically set by Makefile.
+export TERMUX_CONTAINER_COMMIT=""
 # Output main color.
 RGB_COLOR="254;228;208"
 export COLOR="\033[1;38;2;${RGB_COLOR}m"
@@ -175,7 +179,8 @@ function show_info() {
   echo -e "${COLOR}//"
   echo
   echo -e "\n$(po_getmsg "Script Info :")"
-  echo -e "[\uf084] $(po_getmsg "Activation stat")       : Not active"
+  echo -e "[\ueb11] $(po_getmsg "Activation stat")       : Not active"
+  echo -e "[\ue729] $(po_getmsg "Commit id")             : ${TERMUX_CONTAINER_COMMIT}"
   echo -e "[] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[\ue7c4] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[\ue6a3] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
@@ -212,15 +217,14 @@ function show_info() {
   echo -e "[] $(po_getmsg "Platform Codename")     : $(getprop ro.board.platform)"
   echo -e "[] $(po_getmsg "Cpus")                  : $(lscpu | grep CPU\(s\)\: | awk '{print $2}')"
   echo -e "[] $(po_getmsg "Total Memory")          : $(free -g --si | grep "Mem" | awk {'print $2'})GB"
-  #XXX
   _temp=$(cat /sys/class/thermal/thermal_zone0/temp)
-  temp=$(echo $_temp | cut -c 1-2)
+  temp=$((_temp/1000))
   if ((temp > 37)); then
     logo=""
   else
     logo="\uf2dc"
   fi
-  temp+=".$(echo $_temp | cut -c 3)"
+  temp+=".$((_temp%1000))"
   echo -e "[${logo}] $(po_getmsg "Temperature")           : ${temp}°C"
   echo
 }

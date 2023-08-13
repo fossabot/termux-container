@@ -1,6 +1,7 @@
 all :
 	[ -e ruri/ruri ]||(cd ruri&&make static-bionic)
 	[ -e container-console/container-console ]||(cd container-console&&make)
+	sed -i "s/TERMUX_CONTAINER_COMMIT=\"\"/TERMUX_CONTAINER_COMMIT=\"`git log --oneline|head -1|cut -d " " -f 1`\"/" container
 format :
 	shfmt -i 2 -w container
 gettext :
