@@ -206,7 +206,7 @@ function show_info() {
   # Note: `su -c` will not work properly with kernelSU.
   if [[ -e /bin/magisk ]]; then
     echo -e "[] $(po_getmsg "Magisk version")        : $(su -c /bin/magisk -V)"
-    echo -e "[\uf982] $(po_getmsg "SELinux")               : $(sudo getenforce)"
+    echo -e "[\ufc7e] $(po_getmsg "SELinux")               : $(sudo getenforce)"
   fi
   echo -e "\n$(po_getmsg "Hardware info") :"
   echo -e "[\uf493] $(po_getmsg "Brand")                 : $(getprop ro.product.brand)"
