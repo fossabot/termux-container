@@ -28,9 +28,7 @@
 # ●     ●   ● ● ● ●   ●   ●   ●   ●   ● ● ● ●●●●  ●●●●
 # ●   ● ●   ● ●  ●●   ●   ●●●●●   ●   ●  ●● ●     ●  ●
 #  ●●●   ●●●  ●   ●   ●   ●   ●  ●●●  ●   ● ●●●●● ●   ●
-
-
-# \uf0ac \ueafc   
+# 
 # Version info.
 # To be 9.5 now because I rewrote it twice since 8.0.
 export TERMUX_CONTAINER_VERSION="9.5-dev"
@@ -181,9 +179,9 @@ function show_info() {
   echo -e "\n$(po_getmsg "Script Info :")"
   echo -e "[\ueb11] $(po_getmsg "Activation stat")       : Not active"
   echo -e "[\ue729] $(po_getmsg "Commit id")             : ${TERMUX_CONTAINER_COMMIT}"
-  echo -e "[] $(po_getmsg "Author")                : Moe-hacker"
+  echo -e "[\ufb42] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[\ue7c4] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
-  echo -e "[\ue6a3] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
+  echo -e "[\ueb31] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
   echo -e "[\uf1d1] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | tail -1 | awk '{print $2}')"
   echo -e "[\ue78b] $(po_getmsg "ruri License")          : MIT"
   echo -e "[\ue796] $(po_getmsg "rootfstool Version")    : $(rootfstool version | head -1 | awk '{print $3}')"
@@ -201,14 +199,14 @@ function show_info() {
     echo -e "[\ue7a2] $(po_getmsg "Termux Version")        : ${TERMUX_VERSION}"
   fi
   echo -e "[] $(po_getmsg "Username")              : $(whoami)"
-  echo -e "[] $(po_getmsg "Android Version")       : $(getprop ro.build.version.release)"
+  echo -e "[\ufc8e] $(po_getmsg "Android Version")       : $(getprop ro.build.version.release)"
   echo -e "[] $(po_getmsg "Cpu Architecture")      : $(uname -m)"
   echo -e "[] $(po_getmsg "Hostname")              : $(hostname)"
   echo -e "[] $(po_getmsg "Uptime")                : $(uptime -p)"
   # Note: `su -c` will not work properly with kernelSU.
   if [[ -e /bin/magisk ]]; then
     echo -e "[] $(po_getmsg "Magisk version")        : $(su -c /bin/magisk -V)"
-    echo -e "[\uf132] $(po_getmsg "SELinux")               : $(sudo getenforce)"
+    echo -e "[\uf982] $(po_getmsg "SELinux")               : $(sudo getenforce)"
   fi
   echo -e "\n$(po_getmsg "Hardware info") :"
   echo -e "[\uf493] $(po_getmsg "Brand")                 : $(getprop ro.product.brand)"

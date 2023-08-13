@@ -277,7 +277,7 @@ About special characters:
   termux-container uses special characters for a better look.
   But not every font supports them.
   For a test:
-  If this () is not a ubuntu logo:
+  If this () is a tofu but not a ubuntu logo:
   please run:
   mkdir -p ~/.termux
   cp \$PREFIX/share/termux-container/font.ttf ~/.termux
