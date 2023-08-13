@@ -175,13 +175,13 @@ function show_info() {
   echo -e "${COLOR}//"
   echo
   echo -e "\n$(po_getmsg "Script Info :")"
-  echo -e "[] $(po_getmsg "Activation stat")       : Not active"
+  echo -e "[\ue60a] $(po_getmsg "Activation stat")       : Not active"
   echo -e "[] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
-  echo -e "[\ue614] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | tail -1 | awk '{print $2}')"
+  echo -e "[\uf1d1] $(po_getmsg "ruri Version")          : $(ruri -v | head -2 | tail -1 | awk '{print $2}')"
   echo -e "[] $(po_getmsg "ruri License")          : MIT"
-  echo -e "[] $(po_getmsg "rootfstool Version")    : $(rootfstool version | head -1 | awk '{print $3}')"
+  echo -e "[\ue614] $(po_getmsg "rootfstool Version")    : $(rootfstool version | head -1 | awk '{print $3}')"
   echo -e "[] $(po_getmsg "rootfstool License")    : Apache-2.0"
   # Learned from moby's check-config.sh.
   kernelVersion="$(uname -r)"
@@ -206,8 +206,8 @@ function show_info() {
     echo -e "[] $(po_getmsg "SELinux")               : $(sudo getenforce)"
   fi
   echo -e "\n$(po_getmsg "Hardware info") :"
-  echo -e "[] $(po_getmsg "Brand")                 : $(getprop ro.product.brand)"
-  echo -e "[] $(po_getmsg "Model")                 : $(getprop ro.product.model)"
+  echo -e "[\ueadb] $(po_getmsg "Brand")                 : $(getprop ro.product.brand)"
+  echo -e "[\ueadb] $(po_getmsg "Model")                 : $(getprop ro.product.model)"
   echo -e "[] $(po_getmsg "Model Codename")        : $(getprop ro.product.board)"
   echo -e "[] $(po_getmsg "Platform Codename")     : $(getprop ro.board.platform)"
   echo -e "[] $(po_getmsg "Cpus")                  : $(lscpu | grep CPU\(s\)\: | awk '{print $2}')"
@@ -215,8 +215,13 @@ function show_info() {
   #XXX
   _temp=$(cat /sys/class/thermal/thermal_zone0/temp)
   temp=$(echo $_temp | cut -c 1-2)
+  if ((temp > 37)); then
+    logo=""
+  else
+    logo="\uf2dc"
+  fi
   temp+=".$(echo $_temp | cut -c 3)"
-  echo -e "[] $(po_getmsg "Temperature")           : ${temp}°C"
+  echo -e "[${logo}] $(po_getmsg "Temperature")           : ${temp}°C"
   echo
 }
 # Just like the command `docker cp`.
