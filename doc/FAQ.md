@@ -7,6 +7,9 @@ A：大概率不会。
 ## xxxxxxxxx   
 Q：主色彩254;228;208(#fee4d0)有什么特殊含义吗？     
 A：据说是鹿乃应援色？总之是个很温柔的颜色就是了。     
+## xxxxxxxxx  
+Q：为啥info里显示未激活？      
+A：你改成已激活它就是激活的。      
 ## xxxxxxxxx   
 Q：为啥这个版本需要编译了？     
 A：container-console和ruri都是C语言写的，打包过程也更加复杂了，因此引入Makefile。     
