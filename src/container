@@ -34,7 +34,7 @@
 export TERMUX_CONTAINER_VERSION="9.5-dev"
 export TERMUX_CONTAINER_LICENSE="Apache-2.0"
 # Will be automatically set by Makefile.
-export TERMUX_CONTAINER_COMMIT=""
+export TERMUX_CONTAINER_COMMIT_ID=""
 # Output main color.
 RGB_COLOR="254;228;208"
 export COLOR="\033[1;38;2;${RGB_COLOR}m"
@@ -44,52 +44,62 @@ export CAT1="\n${COLOR}  .^.   .^.
  /ﾉｿﾉ\ﾉｿ丶)|
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏ Ｖ ﾉ|ﾉ
-      ⠁⠁"
+      ⠁⠁
+"
 export CAT2="${COLOR}  .^.   .^.
   /⋀\_ﾉ_/⋀\\
  /ﾉｿﾉ\ﾉｿ丶)|
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏  ^ ﾉ|ﾉ
-      ⠁⠁"
+      ⠁⠁
+"
 export CAT3="${COLOR}  .^.   .^.
   /⋀\_ﾉ_/⋀\\
  /ﾉｿﾉ\ﾉｿ丶)|
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏ ぁ ﾉ|ﾉ
-      ⠁⠁"
+      ⠁⠁
+"
 export CAT4="${COLOR}  .^.   .^.
   /⋀\_ﾉ_/⋀\\
  /ﾉｿﾉ\ﾉｿ丶)|
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏ の ﾉ|ﾉ
-      ⠁⠁"
+      ⠁⠁
+"
 export CAT5="${COLOR}  .^.   .^.
   /⋀\_ﾉ_/⋀\\
  /ﾉｿﾉ\ﾉｿ丶)|
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏ ヮ ﾉ|ﾉ
-      ⠁⠁"
+      ⠁⠁
+"
 export CAT6="${COLOR}  .^.   .^.
   /⋀\_ﾉ_/⋀\\
  /ﾉｿﾉ\ﾉｿ丶)|
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏ ++ ﾉ|ﾉ
-      ⠁⠁"
+      ⠁⠁
+"
 export CAT7="${COLOR}  .^.   .^.
   /⋀\_ﾉ_/⋀\\
  /ﾉｿﾉ\ﾉｿ丶)|
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏ xx ﾉ|ﾉ
-      ⠁⠁"
+      ⠁⠁
+"
 export CAT8="${COLOR}  .^.   .^.
   /⋀\_ﾉ_/⋀\\
  /ﾉｿﾉ\ﾉｿ丶)|
 |ﾙﾘﾘ >   )ﾘ
 ﾉノ㇏ ひ ﾉ|ﾉ
-      ⠁⠁"
+      ⠁⠁
+"
 # Show error message and exit.
 function error() {
   echo -e "\033[31m$@\033[0m" >&2
+  printf "${COLOR}${CAT2}\033[0m" >&2
+  echo -e "${COLOR}If you think something is wrong, please report at:\n\033[4mhttps://github.com/Moe-hacker/termux-container/discussions\033[0m"
   exit 1
 }
 # Load configs&&check the environment.
@@ -107,7 +117,7 @@ function _init() {
     echo -e "\033[33mWarning: termux-container has not been tested under linux 3.x or lower.\033[0m" >&2
   fi
 }
-# i18n
+# i18n.
 function po_getmsg() {
   # Since termux does not support multiple languages,
   # the *.mo files seems not works.
@@ -178,7 +188,7 @@ function show_info() {
   echo
   echo -e "\n$(po_getmsg "Script Info :")"
   echo -e "[\ueb11] $(po_getmsg "Activation stat")       : Not active"
-  echo -e "[\ue729] $(po_getmsg "Commit id")             : ${TERMUX_CONTAINER_COMMIT}"
+  echo -e "[\ue729] $(po_getmsg "Commit id")             : ${TERMUX_CONTAINER_COMMIT_ID}"
   echo -e "[\uf46b] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[\ue7c4] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[\uf469] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
