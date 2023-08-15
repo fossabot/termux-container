@@ -99,7 +99,7 @@ export CAT8="${COLOR}  .^.   .^.
 function error() {
   echo -e "\033[31m$@\033[0m" >&2
   printf "${COLOR}${CAT2}\033[0m" >&2
-  echo -e "${COLOR}If you think something is wrong, please report at:\n\033[4mhttps://github.com/Moe-hacker/termux-container/discussions\033[0m"
+  echo -e "${COLOR}If you think something is wrong, please report at:\n\033[4mhttps://github.com/Moe-hacker/termux-container/discussions\033[0m" >&2
   exit 1
 }
 # Load configs&&check the environment.
@@ -108,8 +108,16 @@ function _init() {
     error "Could not find global config file!"
   fi
   source /data/data/com.termux/files/usr/etc/container/global.conf
-  if ! command -v capsh unshare chroot proot ruri 2>&1 >/dev/null; then
-    error "Missing dependencies!"
+  for i in capsh unshare chroot proot wget curl; do
+    if ! command -v $i 2>&1 >/dev/null; then
+      error "Missing dependencies: $i!"
+    fi
+  done
+  if ! command -v ruri 2>&1 >/dev/null; then
+    error "ruri not found, package might be broken!"
+  fi
+  if ! command -v container-console 2>&1 >/dev/null; then
+    error "container-console not found, package might be broken!"
   fi
   kernelVersion="$(uname -r)"
   kernelMajor="${kernelVersion%%.*}"
@@ -188,8 +196,8 @@ function show_info() {
   echo
   echo -e "\n$(po_getmsg "Script Info :")"
   echo
-  echo -e "[\ueb11] $(po_getmsg "Activation stat")       : Not active"
-  echo -e "[\ue729] $(po_getmsg "Commit id")             : ${TERMUX_CONTAINER_COMMIT_ID}"
+  echo -e "[\ueb11] $(po_getmsg "Activation Stat")       : Not Active"
+  echo -e "[\ue729] $(po_getmsg "Commit ID")             : ${TERMUX_CONTAINER_COMMIT_ID}"
   echo -e "[\uf46b] $(po_getmsg "Author")                : Moe-hacker"
   echo -e "[\ue7c4] $(po_getmsg "License")               : ${TERMUX_CONTAINER_LICENSE}"
   echo -e "[\uf469] $(po_getmsg "Version")               : ${TERMUX_CONTAINER_VERSION}"
@@ -204,7 +212,7 @@ function show_info() {
   kernelMinor="${kernelMinor%%.*}"
   kernelPatch="${kernelVersion#*$kernelMinor.}"
   kernelPatch="${kernelPatch%%-*}"
-  echo -e "\n$(po_getmsg "System info") :"
+  echo -e "\n$(po_getmsg "System Info") :"
   echo
   echo -e "[] $(po_getmsg "Kernel Version")        : $kernelMajor.$kernelMinor.$kernelPatch"
   if [[ ${TERMUX_VERSION} != "" ]]; then
@@ -230,7 +238,7 @@ function show_info() {
     echo -e "[\uf639] $(po_getmsg "KernelSU version")      : $(sudo /data/adb/ksud -V)"
     echo -e "[\ufc7e] $(po_getmsg "SELinux")               : $(sudo getenforce)"
   fi
-  echo -e "\n$(po_getmsg "Hardware info") :"
+  echo -e "\n$(po_getmsg "Hardware Info") :"
   echo
   echo -e "[\uf493] $(po_getmsg "Brand")                 : $(getprop ro.product.brand)"
   echo -e "[\uf493] $(po_getmsg "Model")                 : $(getprop ro.product.model)"
