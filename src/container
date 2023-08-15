@@ -97,6 +97,8 @@ export CAT8="${COLOR}  .^.   .^.
 "
 # Show error message and exit.
 function error() {
+  # Usage:
+  # error "Error message"
   echo -e "\033[31m$@\033[0m" >&2
   printf "${COLOR}${CAT2}\033[0m" >&2
   echo -e "${COLOR}If you think something is wrong, please report at:\n\033[4mhttps://github.com/Moe-hacker/termux-container/discussions\033[0m" >&2
@@ -104,6 +106,8 @@ function error() {
 }
 # Load configs&&check the environment.
 function _init() {
+  # Usage:
+  # _init
   if [[ ! -e /data/data/com.termux/files/usr/etc/container/global.conf ]]; then
     error "Could not find global config file!"
   fi
@@ -133,6 +137,8 @@ function po_getmsg() {
   # for translation.
   # NOTE:
   # This function only supports the *.po files created with --no-wrap option.
+  # Usage:
+  # po_getmsg "message"
   PO_FILE="$PREFIX/share/termux-container/lang/container-${TERMUX_CONTAINER_LANGUAGE}.po"
   if [[ ! -e ${PO_FILE} ]]; then
     printf "$@"
@@ -150,6 +156,8 @@ function po_getmsg() {
 }
 # Help page for container-console.
 function console_help() {
+  # Usage:
+  # console_help
   # I hope you can understand...
   echo -e "${COLOR}$(po_getmsg "Usage:")"
   echo "  $(po_getmsg "help                       :Show this page.")"
@@ -169,6 +177,8 @@ function console_help() {
 # In fact it's very very very useless.
 # But it's cool, isn't it?
 function show_info() {
+  # Usage:
+  # show_info
   col=$(($(($(stty size | awk '{print $2}'))) / 2 - 25))
   logo="\033[1;38;2;254;228;208m
 \033[${col}G         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
@@ -260,6 +270,10 @@ function show_info() {
 }
 # Just like the command `docker cp`.
 function container_cp() {
+  # Usage: 
+  # container_cp container_name:/path/in/container /path/in/host
+  # container_cp /path/in/host container_name:/path/in/container
+  # container_name should not include character `/`
   printf "${COLOR}"
   if [[ $1 == *:/* ]]; then
     CONTAINER_NAME=$(echo $1 | cut -d ":" -f 1)
@@ -313,6 +327,8 @@ function pull_rootfs() {
 }
 # These code has been kept because I haven't added them to rootfstool.
 function get_manjaro_rootfs() {
+  # Usage:
+  # get_manjaro_rootfs
   proot -0 rm -rf $PREFIX/tmp/container
   mkdir -p $PREFIX/tmp/container
   [[ -e $PREFIX/var/container ]] || mkdir -p $PREFIX/var/container
@@ -415,6 +431,9 @@ Include = /etc/pacman.d/mirrorlist
 # From Tmoe.
 # In fact I don't think that there are any phones with amd64 CPUS and Android system now.
 function get_cpu_arch() {
+  # Usage:
+  # get_cpu_arch
+  # It will create a global variable ${CPU_ARCH}
   DPKG_ARCH=$(dpkg --print-architecture)
   case ${DPKG_ARCH} in
   armel) export CPU_ARCH="armel" ;;
