@@ -28,7 +28,7 @@
 # ●     ●   ● ● ● ●   ●   ●   ●   ●   ● ● ● ●●●●  ●●●●
 # ●   ● ●   ● ●  ●●   ●   ●●●●●   ●   ●  ●● ●     ●  ●
 #  ●●●   ●●●  ●   ●   ●   ●   ●  ●●●  ●   ● ●●●●● ●   ●
-# 
+#
 # Version info.
 # To be 9.5 now because I rewrote it twice since 8.0.
 export TERMUX_CONTAINER_VERSION="9.5-dev"
@@ -156,7 +156,7 @@ function console_help() {
   echo "  $(po_getmsg "login [Name]               :Login to the container.")"
   echo "  $(po_getmsg "import [Image File]        :Import an image.")"
   echo "  $(po_getmsg "export [Name]              :Export a container as an image.")"
-  echo "  $(po_getmsg "info                       :Show version info.")"
+  echo "  $(po_getmsg "info                       :Show version && system info.")"
 }
 # In fact it's very very very useless.
 # But it's cool, isn't it?
@@ -213,7 +213,9 @@ function show_info() {
   echo -e "[] $(po_getmsg "Cpu Architecture")      : $(uname -m)"
   echo -e "[] $(po_getmsg "Hostname")              : $(hostname)"
   echo -e "[] $(po_getmsg "Uptime")                : $(uptime -p)"
-  # Note: `su -c` will not work properly with kernelSU.
+  su -c true 2>&1 >/dev/null && STAT="rooted" || STAT="not rooted"
+  echo -e "[] $(po_getmsg "Device Stat")           : ${STAT}"
+  # XXX: `su -c` will not work properly with kernelSU.
   if [[ -e /bin/magisk ]]; then
     echo -e "[] $(po_getmsg "Magisk version")        : $(su -c /bin/magisk -V)"
     echo -e "[\ufc7e] $(po_getmsg "SELinux")               : $(sudo getenforce)"
@@ -227,13 +229,13 @@ function show_info() {
   echo -e "[] $(po_getmsg "SOC Model")             : $(getprop ro.soc.model)"
   echo -e "[] $(po_getmsg "Total Memory")          : $(free -g --si | grep "Mem" | awk {'print $2'})GB"
   _temp=$(cat /sys/class/thermal/thermal_zone0/temp)
-  temp=$((_temp/1000))
+  temp=$((_temp / 1000))
   if ((temp > 37)); then
     logo=""
   else
     logo="\uf2dc"
   fi
-  temp+=".$((_temp%1000))"
+  temp+=".$((_temp % 1000))"
   echo -e "[${logo}] $(po_getmsg "Temperature")           : ${temp}°C"
   echo
 }
