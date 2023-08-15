@@ -187,6 +187,7 @@ function show_info() {
   echo -e "${COLOR}//"
   echo
   echo -e "\n$(po_getmsg "Script Info :")"
+  echo
   echo -e "[\ueb11] $(po_getmsg "Activation stat")       : Not active"
   echo -e "[\ue729] $(po_getmsg "Commit id")             : ${TERMUX_CONTAINER_COMMIT_ID}"
   echo -e "[\uf46b] $(po_getmsg "Author")                : Moe-hacker"
@@ -204,6 +205,7 @@ function show_info() {
   kernelPatch="${kernelVersion#*$kernelMinor.}"
   kernelPatch="${kernelPatch%%-*}"
   echo -e "\n$(po_getmsg "System info") :"
+  echo
   echo -e "[] $(po_getmsg "Kernel Version")        : $kernelMajor.$kernelMinor.$kernelPatch"
   if [[ ${TERMUX_VERSION} != "" ]]; then
     echo -e "[\ufcb5] $(po_getmsg "Termux Version")        : ${TERMUX_VERSION}"
@@ -229,6 +231,7 @@ function show_info() {
     echo -e "[\ufc7e] $(po_getmsg "SELinux")               : $(sudo getenforce)"
   fi
   echo -e "\n$(po_getmsg "Hardware info") :"
+  echo
   echo -e "[\uf493] $(po_getmsg "Brand")                 : $(getprop ro.product.brand)"
   echo -e "[\uf493] $(po_getmsg "Model")                 : $(getprop ro.product.model)"
   echo -e "[] $(po_getmsg "Model Codename")        : $(getprop ro.product.board)"
