@@ -215,9 +215,17 @@ function show_info() {
   echo -e "[] $(po_getmsg "Uptime")                : $(uptime -p)"
   su -c true 2>&1 >/dev/null && STAT="rooted" || STAT="not rooted"
   echo -e "[] $(po_getmsg "Device Stat")           : ${STAT}"
+  for i in $(ls /proc/$$/ns | grep -v for_children); do
+    NS+="$i "
+  done
+  echo -e "[\uf013] $(po_getmsg "Supported namespace")   : ${NS}"
   # XXX: `su -c` will not work properly with kernelSU.
   if [[ -e /bin/magisk ]]; then
     echo -e "[] $(po_getmsg "Magisk version")        : $(su -c /bin/magisk -V)"
+    echo -e "[\ufc7e] $(po_getmsg "SELinux")               : $(sudo getenforce)"
+  fi
+  if [[ -e /data/adb/ksud ]]; then
+    echo -e "[\uf639] $(po_getmsg "KernelSU version")      : $(sudo /data/adb/ksud -V)"
     echo -e "[\ufc7e] $(po_getmsg "SELinux")               : $(sudo getenforce)"
   fi
   echo -e "\n$(po_getmsg "Hardware info") :"
