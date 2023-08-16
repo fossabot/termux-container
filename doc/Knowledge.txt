@@ -2,7 +2,7 @@ Chroot:
 Chroot was first introduced in 1979, during development of Seventh Edition Unix.
 
 Unshare:
-Since version 2.4 , Linux added support fo the first namspace--mount namespace, as the flag CLONE_NEWNS
+Since version 2.4 , Linux added support for the first namspace (mount namespace), as the flag CLONE_NEWNS of unshare.
 
 CLONE_NEWUTS (since Linux 2.6.19)
 CLONE_NEWIPC (since Linux 2.6.19)

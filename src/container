@@ -104,7 +104,7 @@ function error() {
   echo -e "${COLOR}If you think something is wrong, please report at:\n\033[4mhttps://github.com/Moe-hacker/termux-container/discussions\033[0m" >&2
   exit 1
 }
-# Load configs&&check the environment.
+# Load configs && check the environment.
 function _init() {
   # Usage:
   # _init
@@ -307,6 +307,8 @@ function container_cp() {
 }
 # Most of the code were rewritten to rootfstool.
 function pull_rootfs() {
+  # Usage:
+  # pull_rootfs OS_DISTRO VERSION (CPU_ARCH)
   #TODO
   OS=$1
   VERSION=$2
@@ -446,11 +448,13 @@ function get_cpu_arch() {
 }
 # Just like `docker rmi`?
 function remove_image() {
+  # Usage:
+  # remove_image OS_DISTRO VERSION (CPU_ARCH)
   OS=$1
   VERSION=$2
   CPU_ARCH=$3
   if [[ ${CPU_ARCH} == "" ]]; then
-    GET_CPU_ARCH
+    get_cpu_arch
   fi
   if [[ -e $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz ]]; then
     rm -fv $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz
@@ -538,7 +542,6 @@ function create_proot_container() {
 }
 #XXX
 function init_chroot_container() {
-  #setenforce 0 2>&1 >/dev/null
   mount -o remount,suid /data
   mount --rbind ${CONTAINER_DIR} ${CONTAINER_DIR}
   mount -o ro,bind /sdcard ${CONTAINER_DIR}/sdcard/
