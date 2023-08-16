@@ -1,0 +1,60 @@
+Chroot:
+Chroot was first introduced in 1979, during development of Seventh Edition Unix.
+
+Unshare:
+Since version 2.4 , Linux added support fo the first namspace--mount namespace, as the flag CLONE_NEWNS
+
+CLONE_NEWUTS (since Linux 2.6.19)
+CLONE_NEWIPC (since Linux 2.6.19)
+CLONE_NEWNET (since Linux 2.6.24)
+CLONE_SYSVSEM (since Linux 2.6.26)
+CLONE_NEWUSER (since Linux 3.8)
+CLONE_NEWPID (since Linux 3.8)
+CLONE_NEWCGROUP (since Linux 4.6)
+CLONE_NEWTIME (since Linux 5.6)
+
+Linux capabilities:
+Starting with Linux 2.2, Linux divides the privileges traditionally associated with superuser into distinct units, known as capabilities, which can be independently enabled and disabled.
+Capabilities are a per-thread attribute.
+
+CAP_CHOWN
+CAP_DAC_OVERRIDE
+CAP_DAC_READ_SEARCH
+CAP_FOWNER
+CAP_FSETID
+CAP_IPC_LOCK
+CAP_IPC_OWNER
+CAP_KILL
+CAP_LEASE 
+CAP_LINUX_IMMUTABLE
+CAP_NET_ADMIN
+CAP_NET_BIND_SERVICE
+CAP_NET_BROADCAST
+CAP_NET_RAW
+CAP_SETGID
+CAP_SETPCAP
+CAP_SETUID
+CAP_SYS_ADMIN
+CAP_SYS_BOOT
+CAP_SYS_CHROOT
+CAP_SYS_MODULE
+CAP_SYS_NICE
+CAP_SYS_PACCT
+CAP_SYS_PTRACE
+CAP_SYS_RAWIO
+CAP_SYS_RESOURCE
+CAP_SYS_TIME
+CAP_SYS_TTY_CONFIG
+CAP_MKNOD (since Linux 2.4)
+CAP_AUDIT_CONTROL (since Linux 2.6.11)
+CAP_AUDIT_WRITE (since Linux 2.6.11)
+CAP_SETFCAP (since Linux 2.6.24)
+CAP_MAC_ADMIN (since Linux 2.6.25)
+CAP_MAC_OVERRIDE (since Linux 2.6.25)
+CAP_SYSLOG (since Linux 2.6.37)
+CAP_WAKE_ALARM (since Linux 3.0)
+CAP_BLOCK_SUSPEND (since Linux 3.5)
+CAP_AUDIT_READ (since Linux 3.16)
+CAP_BPF (since Linux 5.8)
+CAP_PERFMON (since Linux 5.8)
+CAP_CHECKPOINT_RESTORE (since Linux 5.9)
