@@ -1232,20 +1232,24 @@ function remove_container() {
   fi
 }
 function script_help() {
-  LINE=$(($(($(stty size | awk '{print $2}'))) / 2 - 23))
-  echo -e "\033[${LINE}C${COLOR}                  _________"
-  echo -e "\033[${LINE}C                 /\\        \\"
-  echo -e "\033[${LINE}C                /  \\        \\"
-  echo -e "\033[${LINE}C               /    \\        \\"
-  echo -e "\033[${LINE}C              /      \\________\\"
-  echo -e "\033[${LINE}C              \\      /        / "
-  echo -e "\033[${LINE}C               \\    /        /"
-  echo -e "\033[${LINE}C                \\  /        /"
-  echo -e "\033[${LINE}C                 \\/________/"
-  echo
-  echo -e "\033[${LINE}C═╔╝╔═╝╔═║╔╔ ║ ║║ ║  ╔═╝╔═║╔═ ═╔╝╔═║╝╔═ ╔═╝╔═║"
-  echo -e "\033[${LINE}C ║ ╔═╝╔╔╝║║║║ ║ ╝ ═╝║  ║ ║║ ║ ║ ╔═║║║ ║╔═╝╔╔╝"
-  echo -e "\033[${LINE}C ╝ ══╝╝ ╝╝╝╝══╝╝ ╝  ══╝══╝╝ ╝ ╝ ╝ ╝╝╝ ╝══╝╝ ╝"
+  col=$(($(($(stty size | awk '{print $2}'))) / 2 - 25))
+  logo="\033[1;38;2;254;228;208m
+\033[${col}G         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
+\033[${col}G           ●   ●     ●   ● ●● ●● ●   ●  ● ●
+\033[${col}G           ●   ●●●●  ●●●●  ● ● ● ●   ●   ●
+\033[${col}G           ●   ●     ●  ●  ●   ● ●   ●  ● ●
+\033[${col}G           ●   ●●●●● ●   ● ●   ●  ●●●  ●   ●
+
+
+
+\033[${col}G ●●●   ●●●  ●   ● ●●●●●   ●    ●●●  ●   ● ●●●●● ●●●●
+\033[${col}G●   ● ●   ● ●●  ●   ●    ● ●    ●   ●●  ● ●     ●   ●
+\033[${col}G●     ●   ● ● ● ●   ●   ●   ●   ●   ● ● ● ●●●●  ●●●●
+\033[${col}G●   ● ●   ● ●  ●●   ●   ●●●●●   ●   ●  ●● ●     ●  ●
+\033[${col}G ●●●   ●●●  ●   ●   ●   ●   ●  ●●●  ●   ● ●●●●● ●   ●
+
+"
+  printf "$logo"
   SIZE=$(stty size | awk '{print $2}')
   let SIZE=$(($SIZE - 16))
   echo "//"
@@ -1419,14 +1423,14 @@ function easy_mode() {
   3) EASY_RUN ;;
   esac
 }
-# All functions start here.
+# I think a large script should includes a main function...
 function main() {
   case $1 in
   "-h") script_help ;;
   "-E") easy_mode ;;
   "-e") exec_function ${@:2} ;;
   "cp") container_cp $2 $3 ;;
-  # Invalid function, just to check if termux-container exists.
+  # Invalid option, just to check if termux-container exists.
   "-t") exit 0 ;;
   "") container_console ;;
   *) container_console_main ${@:1} ;;
