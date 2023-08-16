@@ -15,11 +15,12 @@ Prohibited uses:
                                                                                    
 Additional prohibited uses (only for users in People's Republic of China):         
                                                                                    
-  • You may use this Software only for lawful purposes.  You may not use this Software:                                                                               
-  • In any way that breaches any applicable Chinese law or regulation.             
-  • In any way that is unlawful or fraudulent or has any unlawful or fraudulent purpose or effect.                                                                    
-  • To knowingly send or make any material that contains viruses, Trojan horses, worms, time-bombs, keystroke loggers, spyware, adware or any other harmful programs or similar computer code designed to adversely affect the operation of any computer software or hardware.                                                              
-  • In any way that violate the Criminal Law of the People's Republic of China.    
+  You may use this Software only for lawful purposes.
+  You may not use this Software:                                                                               
+   • In any way that breaches any applicable Chinese law or regulation.             
+   • In any way that is unlawful or fraudulent or has any unlawful or fraudulent purpose or effect.                                                                    
+   • To knowingly send or make any material that contains viruses, Trojan horses, worms, time-bombs, keystroke loggers, spyware, adware or any other harmful programs or similar computer code designed to adversely affect the operation of any computer software or hardware.                                                              
+   • In any way that violate the Criminal Law of the People's Republic of China.    
                                                                                    
 You also agree:                                                                    
                                                                                    

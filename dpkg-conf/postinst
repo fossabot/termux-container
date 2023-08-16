@@ -65,7 +65,7 @@ while ((x < 5)); do
     printf "\033[${k1};${j}H "
     printf "\033[${k2};${j}H "
     j=$((j + 1))
-    sleep 0.01
+    sleep 0.007
   done
   k1=$((k1 + 1))
   k2=$((k2 + 1))
@@ -91,13 +91,13 @@ while ((k < 3)); do
     printf "\033[${row};${j}H\033[1;38;2;254;228;208m●"
     j=$((j + 1))
     printf "\033[${row};${j}H\033[1;38;2;135;206;250m●●●●●●●●●●●●●"
-    sleep 0.01
+    sleep 0.007
   done
   while ((i <= x)); do
     i=$((i + 1))
     printf "\033[${row};${j}H\033[1;38;2;254;228;208m●"
     j=$((j + 1))
-    sleep 0.01
+    sleep 0.007
   done
   k=$((k + 1))
 done
@@ -105,7 +105,7 @@ i=0
 j=0
 while ((i <= x)); do
   printf "\033[${row};${j}H\033[1;38;2;135;206;250m●"
-  sleep 0.01
+  sleep 0.007
   i=$((i + 1))
   j=$((j + 1))
 done
@@ -185,11 +185,12 @@ termsofuse="\033[38;2;254;228;208m
 
 \033[1mAdditional prohibited uses (only for users in People's Republic of China):
 
-  \033[0m\033[38;2;254;228;208m• You may use this Software only for lawful purposes.  You may not use this Software:
-  • In any way that breaches any applicable Chinese law or regulation.
-  • In any way that is unlawful or fraudulent or has any unlawful or fraudulent purpose or effect.
-  • To knowingly send or make any material that contains viruses, Trojan horses, worms, time-bombs, keystroke loggers, spyware, adware or any other harmful programs or similar computer code designed to adversely affect the operation of any computer software or hardware.
-  • In any way that violate the Criminal Law of the People's Republic of China.
+  \033[0m\033[38;2;254;228;208m• You may use this Software only for lawful purposes.
+  You may not use this Software:
+   • In any way that breaches any applicable Chinese law or regulation.
+   • In any way that is unlawful or fraudulent or has any unlawful or fraudulent purpose or effect.
+   • To knowingly send or make any material that contains viruses, Trojan horses, worms, time-bombs, keystroke loggers, spyware, adware or any other harmful programs or similar computer code designed to adversely affect the operation of any computer software or hardware.
+   • In any way that violate the Criminal Law of the People's Republic of China.
 
 \033[1mYou also agree:
 
