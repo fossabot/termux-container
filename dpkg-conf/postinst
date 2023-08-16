@@ -165,13 +165,15 @@ termsofuse="\033[1;38;2;254;228;208m
 \033[${col}G  ●   ●●●●  ●●●●  ● ● ●  ●●●   ●   ● ●●●●   ●   ●  ●●●  ●●●●
 \033[${col}G  ●   ●     ●  ●  ●   ●     ●  ●   ● ●      ●   ●     ● ●
 \033[${col}G  ●   ●●●●● ●   ● ●   ● ●●●●    ●●●  ●       ●●●  ●●●●  ●●●●●
+
+
 "
 printf "$termsofuse"
 sleep 3
 termsofuse="\033[38;2;254;228;208m
 \033[1mACCEPTANCE OF TERMS OF USE
 
-  \033[0m\033[38;2;254;228;208mThe author of termux-container, Moe-hacker@Github, also named \`沨鸾\` (\"I\"), and other respected contributors, provide you with access to resources of github repo Moe-hacker/termux-container, including documents, software and source code (\"Software\").
+  \033[0m\033[38;2;254;228;208mThe author of termux-container, Moe-hacker@Github, also named \`沨鸾\` (\"I\"), and other contributors, provide you with access to resources of github repo Moe-hacker/termux-container, including documents, software and source code (\"Software\").
   The Software, and all other resources of this github repo subject to these Terms of Use. 
   I reserve the right to update these Terms of Use at any time without notice to you.
 
@@ -214,6 +216,8 @@ license="\033[1;38;2;254;228;208m
 \033[${col}G●       ●   ●     ●●●●  ● ● ●  ●●●  ●●●●
 \033[${col}G●       ●   ●   ● ●     ●  ●●     ● ●
 \033[${col}G●●●●●  ●●●   ●●●  ●●●●● ●   ● ●●●●  ●●●●●
+
+
 "
 printf "$license"
 sleep 3

@@ -1,7 +1,7 @@
                                                                                    
 ACCEPTANCE OF TERMS OF USE                                                         
                                                                                    
-  The author of termux-container, Moe-hacker@Github, also named `沨鸾` ("I"), and other respected contributors, provide you with access to resources of github repo Moe-hacker/termux-container, including documents, software and source code ("Software").                                                                                
+  The author of termux-container, Moe-hacker@Github, also named `沨鸾` ("I"), and other contributors, provide you with access to resources of github repo Moe-hacker/termux-container, including documents, software and source code ("Software").                                                                                
   The Software, and all other resources of this github repo subject to these Terms of Use.                                                                            
   I reserve the right to update these Terms of Use at any time without notice to you.                                                                                 
                                                                                    
