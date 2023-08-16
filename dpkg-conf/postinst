@@ -19,6 +19,14 @@
 # 100% shit-code.
 # You can't understand how this works,
 # trust me, because I don't understand either.
+while true; do
+  if (($(stty size | awk '{print $2}') < 64))||(($(stty size | awk '{print $1}') < 14)); then
+    echo -e "\033[31mWindow is too small, 64x14 least."
+    sleep 1
+  else
+    break
+  fi
+done
 col=$(($(($(stty size | awk '{print $2}'))) / 2 - 25))
 logo="\033[?25l\033[1;38;2;254;228;208m
 \033[${col}G         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
@@ -150,6 +158,54 @@ o="\033[1;38;2;254;228;208m
 printf "$o"
 sleep 2
 clear
+col=$(($(($(stty size | awk '{print $2}'))) / 2 - 32))
+termsofuse="\033[1;38;2;254;228;208m
+\033[${col}G●●●●● ●●●●● ●●●●  ●   ●  ●●●●   ●●●  ●●●●●  ●   ●  ●●●● ●●●●●
+\033[${col}G  ●   ●     ●   ● ●● ●● ●      ●   ● ●      ●   ● ●     ●
+\033[${col}G  ●   ●●●●  ●●●●  ● ● ●  ●●●   ●   ● ●●●●   ●   ●  ●●●  ●●●●
+\033[${col}G  ●   ●     ●  ●  ●   ●     ●  ●   ● ●      ●   ●     ● ●
+\033[${col}G  ●   ●●●●● ●   ● ●   ● ●●●●    ●●●  ●       ●●●  ●●●●  ●●●●●
+"
+printf "$termsofuse"
+sleep 3
+termsofuse="\033[38;2;254;228;208m
+\033[1mACCEPTANCE OF TERMS OF USE
+
+  \033[0m\033[38;2;254;228;208mThe author of termux-container, Moe-hacker@Github, also named \`沨鸾\` (\"I\"), and other respected contributors, provide you with access to resources of github repo Moe-hacker/termux-container, including documents, software and source code (\"Software\").
+  The Software, and all other resources of this github repo subject to these Terms of Use. 
+  I reserve the right to update these Terms of Use at any time without notice to you.
+
+  By using this Software you accept these terms.
+  By using this Software, you confirm that you accept the terms of this policy and that you agree to comply with them.
+  If you do not agree to these terms, you must not use this Software.
+
+\033[1mProhibited uses:
+
+  \033[0m\033[38;2;254;228;208m• I am not willing to restrict how you can use this software, it should be your freedom, but if you want to redistribute this software, please comply with the license which you can see in the next page.
+
+\033[1mAdditional prohibited uses (only for users in People's Republic of China):
+
+  \033[0m\033[38;2;254;228;208m• You may use this Software only for lawful purposes.  You may not use this Software:
+  • In any way that breaches any applicable Chinese law or regulation.
+  • In any way that is unlawful or fraudulent or has any unlawful or fraudulent purpose or effect.
+  • To knowingly send or make any material that contains viruses, Trojan horses, worms, time-bombs, keystroke loggers, spyware, adware or any other harmful programs or similar computer code designed to adversely affect the operation of any computer software or hardware.
+  • In any way that violate the Criminal Law of the People's Republic of China.
+
+\033[1mYou also agree:
+
+  \033[0m\033[38;2;254;228;208m• This Software is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  • I am not responsible for anything that may happen to your device by using this Software.
+  • You use this Software at your own risk and take the responsibility upon yourself.
+  • And you are not to blame me or Github and its developers.
+
+\033[1mMAKE SURE YOU HAVE READ THE TERMS OF USE,
+AND AGREE WITH THEM.
+OR YOU CAN JUST PRESS CTRL-C TO EXIT.
+PRESS ENTER TO CONTINUE.
+"
+printf "$termsofuse" | pv -qL 100
+read x
+clear
 col=$(($(($(stty size | awk '{print $2}'))) / 2 - 21))
 license="\033[1;38;2;254;228;208m
 \033[${col}G●      ●●●   ●●●  ●●●●● ●   ●  ●●●● ●●●●●
@@ -240,26 +296,9 @@ License of FiraCode fonts:
   This license is copied below, and is also available with a FAQ at:
   http://scripts.sil.org/OFL
 
-
-"
-printf "$license" | pv -qL 100
-sleep 2
-license="\033[33m
-
-///WARNING///
-
-  * Your warranty is now void.
-  * I am not responsible for anything that may happen to your device by using this program.
-  * You do it at your own risk and take the responsibility upon yourself.
-  * This program has no super cow power.
-
-MAKE SURE YOU HAVE READ THE LICENSE AND WARNINGS,
-AND AGREE WITH THEM.
-OR YOU CAN JUST PRESS CTRL-C TO EXIT.
-
 PRESS ENTER TO CONTINUE.
 "
-printf "$license"
+printf "$license" | pv -qL 100
 read x
 clear
 col=$(($(($(stty size | awk '{print $2}'))) / 2 - 12))
