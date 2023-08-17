@@ -1,6 +1,8 @@
 # THIS BRANCH IS STILL UNDER DEVELOPMENT.
 # DO NOT TRY TO USE THIS BRANCH !!!
 # TERMUX-CONTAINER v9.5, A NEW START.
+# 在研究容器安全，先给ruri加个Seccomp沙盒再说，勿催。。。
+# 实在等不急就直接用ruri配rootfstool吧，个人觉得应该也够用了。。。
 ```
         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
           ●   ●     ●   ● ●● ●● ●   ●  ● ●
