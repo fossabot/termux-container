@@ -34,7 +34,6 @@ package cap_select
 import (
 	"fmt"
 	tea "github.com/charmbracelet/bubbletea"
-	"os"
 )
 
 type model struct {
@@ -134,18 +133,11 @@ func (m model) View() string {
 	s += "\nPress Up/Down to move, Space to select, Enter to apply\n"
 	return s
 }
-func Cap_select() int {
+func Cap_select() map[int]struct{} {
 	p := tea.NewProgram(initialModel())
 	m, err := p.Run()
 	if err != nil {
 		fmt.Println("Error:", err)
-		os.Exit(1)
 	}
-	for i := 0; i < len(m.(model).choices); i++ {
-		if _, ok := m.(model).selected[i]; ok {
-			fmt.Print(i)
-		}
-	}
-	fmt.Print(m.(model).selected)
-	return 0
+	return m.(model).selected
 }

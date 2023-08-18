@@ -33,22 +33,12 @@
 package console
 
 import (
-
-	//"fmt"
-	"log"
+	"fmt"
 	"strings"
 
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 )
-
-func Console() {
-	print("\n")
-	p := tea.NewProgram(initialModel())
-	if _, err := p.Run(); err != nil {
-		log.Fatal(err)
-	}
-}
 
 type (
 	errMsg error
@@ -98,7 +88,7 @@ func (m model) View() string {
 	view := strings.Fields(m.textInput.View())
 	value := strings.Fields(m.textInput.Value())
 	var ret string
-	var list []string = []string{"help","exit","new","search","pull","rmi","cp","ls","rm","login","import","export","info"}
+	var list []string = []string{"help", "exit", "new", "search", "pull", "rmi", "cp", "ls", "rm", "login", "import", "export", "info"}
 	if len(value) == 0 {
 		ret = m.textInput.View()
 	} else {
@@ -121,4 +111,13 @@ func (m model) View() string {
 		}
 	}
 	return ret
+}
+func Console() string {
+	print("\n")
+	p := tea.NewProgram(initialModel())
+	m, err := p.Run()
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	return m.(model).textInput.Value()
 }

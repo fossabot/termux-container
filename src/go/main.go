@@ -34,9 +34,12 @@ package main
 import (
 	cap_select "container-console/cap_select"
 	console "container-console/console"
+	"fmt"
 )
 
 func main() {
-	cap_select.Cap_select()
-	console.Console()
+	m:=cap_select.Cap_select()
+	fmt.Print(m)
+	n:=console.Console()
+	fmt.Print(n)
 }
