@@ -54,7 +54,7 @@ func initialModel() model {
 	ti.Focus()
 	ti.CharLimit = 156
 	ti.Width = 20
-	ti.Prompt = "> "
+	ti.Prompt = "\033[1;38;2;254;228;208m>\033[0m "
 	ti.Cursor.Blink = false
 	return model{
 		textInput: ti,
@@ -97,13 +97,13 @@ func (m model) View() string {
 			highlight := false
 			for j := 0; j < len(list); j++ {
 				if value[i] == list[j] {
-					ret += "\033[32m" + strings.ReplaceAll(view[i+1], "\033[0m", "\033[0m\033[32m") + " " + "\033[0m"
+					ret += "\033[1;38;2;152;245;225m" + strings.ReplaceAll(view[i+1], "\033[0m", "\033[0m\033[1;38;2;152;245;225m") + " " + "\033[0m"
 					highlight = true
 					break
 				}
 			}
 			if highlight == false {
-				ret += view[i+1] + " " + "\033[0m"
+				ret += "\033[1m" + view[i+1] + " " + "\033[0m"
 			}
 		}
 		if m.textInput.Value()[len(m.textInput.Value())-1] == ' ' {

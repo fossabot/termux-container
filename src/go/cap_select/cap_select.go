@@ -83,12 +83,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 func (m model) View() string {
 	s := "\033[1;38;2;254;228;208mChoose the capabilities to be dropped\n\n"
-	if m.cursor > 3 && m.cursor < 37 {
+	if m.cursor > 3 && m.cursor < len(m.choices)-3 {
 		for i, choice := range m.choices {
 			if i-3 <= m.cursor && i+3 >= m.cursor {
 				cursor := "  "
 				if m.cursor == i {
-					cursor = "->"
+					cursor = "\033[1;38;2;152;245;225m->\033[1;38;2;254;228;208m"
 				}
 				checked := " "
 				if _, ok := m.selected[i]; ok {
@@ -97,12 +97,12 @@ func (m model) View() string {
 				s += fmt.Sprintf("\033[1;38;2;254;228;208m%s [%s\033[1;38;2;254;228;208m] %s\n", cursor, checked, choice)
 			}
 		}
-	} else if m.cursor >= 37 {
+	} else if m.cursor >= len(m.choices)-3 {
 		for i := m.cursor - 3; i < m.cursor+3; i++ {
-			if i <= 40 {
+			if i < len(m.choices) {
 				cursor := "  "
 				if m.cursor == i {
-					cursor = "->"
+					cursor = "\033[1;38;2;152;245;225m->\033[1;38;2;254;228;208m"
 				}
 				checked := " "
 				if _, ok := m.selected[i]; ok {
@@ -121,7 +121,7 @@ func (m model) View() string {
 		for i := 0; i < m.cursor+4; i++ {
 			cursor := "  "
 			if m.cursor == i {
-				cursor = "->"
+				cursor = "\033[1;38;2;152;245;225m->\033[1;38;2;254;228;208m"
 			}
 			checked := " "
 			if _, ok := m.selected[i]; ok {
