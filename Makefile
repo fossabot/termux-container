@@ -21,11 +21,11 @@ O = out
 all: show-greetings install-dependence update-code build
 show-greetings:
 	@printf "\033[1;38;2;254;228;208m"
-	@printf "    ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●\n"
-	@printf "      ●   ●     ●   ● ●● ●● ●   ●  ● ●\n"
-	@printf "      ●   ●●●●  ●●●●  ● ● ● ●   ●   ●\n"
-	@printf "      ●   ●     ●  ●  ●   ● ●   ●  ● ●\n"
-	@printf "      ●   ●●●●● ●   ● ●   ●  ●●●  ●   ●\n"
+	@printf "        ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●\n"
+	@printf "          ●   ●     ●   ● ●● ●● ●   ●  ● ●\n"
+	@printf "          ●   ●●●●  ●●●●  ● ● ● ●   ●   ●\n"
+	@printf "          ●   ●     ●  ●  ●   ● ●   ●  ● ●\n"
+	@printf "          ●   ●●●●● ●   ● ●   ●  ●●●  ●   ●\n"
 	@echo
 	@echo
 	@printf " ●●●   ●●●  ●   ● ●●●●●   ●    ●●●  ●   ● ●●●●● ●●●●\n"
