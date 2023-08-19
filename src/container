@@ -179,30 +179,22 @@ function console_help() {
 function show_info() {
   # Usage:
   # show_info
-  col=$(($(($(stty size | awk '{print $2}'))) / 2 - 25))
   logo="\033[1;38;2;254;228;208m
-\033[${col}G         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
-\033[${col}G           ●   ●     ●   ● ●● ●● ●   ●  ● ●
-\033[${col}G           ●   ●●●●  ●●●●  ● ● ● ●   ●   ●
-\033[${col}G           ●   ●     ●  ●  ●   ● ●   ●  ● ●
-\033[${col}G           ●   ●●●●● ●   ● ●   ●  ●●●  ●   ●
+         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
+           ●   ●     ●   ● ●● ●● ●   ●  ● ●
+           ●   ●●●●  ●●●●  ● ● ● ●   ●   ●
+           ●   ●     ●  ●  ●   ● ●   ●  ● ●
+           ●   ●●●●● ●   ● ●   ●  ●●●  ●   ●
 
 
 
-\033[${col}G ●●●   ●●●  ●   ● ●●●●●   ●    ●●●  ●   ● ●●●●● ●●●●
-\033[${col}G●   ● ●   ● ●●  ●   ●    ● ●    ●   ●●  ● ●     ●   ●
-\033[${col}G●     ●   ● ● ● ●   ●   ●   ●   ●   ● ● ● ●●●●  ●●●●
-\033[${col}G●   ● ●   ● ●  ●●   ●   ●●●●●   ●   ●  ●● ●     ●  ●
-\033[${col}G ●●●   ●●●  ●   ●   ●   ●   ●  ●●●  ●   ● ●●●●● ●   ●
+ ●●●   ●●●  ●   ● ●●●●●   ●    ●●●  ●   ● ●●●●● ●●●●
+●   ● ●   ● ●●  ●   ●    ● ●    ●   ●●  ● ●     ●   ●
+●     ●   ● ● ● ●   ●   ●   ●   ●   ● ● ● ●●●●  ●●●●
+●   ● ●   ● ●  ●●   ●   ●●●●●   ●   ●  ●● ●     ●  ●
+ ●●●   ●●●  ●   ●   ●   ●   ●  ●●●  ●   ● ●●●●● ●   ●
 "
   printf "$logo"
-  SIZE=$(stty size | awk '{print $2}')
-  let SIZE=$(($SIZE - 5))
-  echo "//"
-  echo
-  echo -e "\e[30;1;48;2;254;228;208;38;2;0;0;0mKM&KC$(yes " " | sed $SIZE'q' | tr -d '\n')\033[0m"
-  echo
-  echo -e "${COLOR}//"
   echo
   echo -e "\n$(po_getmsg "Script Info :")"
   echo
@@ -241,7 +233,7 @@ function show_info() {
   echo -e "[\uf013] $(po_getmsg "Supported namespace")   : ${NS}"
   # XXX: `su -c` will not work properly with kernelSU.
   if [[ -e /bin/magisk ]]; then
-    echo -e "[] $(po_getmsg "Magisk version")        : $(su -c /bin/magisk -V)"
+    echo -e "[\ufd23] $(po_getmsg "Magisk version")        : $(su -c /bin/magisk -V)"
     echo -e "[\ufc7e] $(po_getmsg "SELinux")               : $(sudo getenforce)"
   fi
   if [[ -e /data/adb/ksud ]]; then
