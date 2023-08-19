@@ -270,7 +270,7 @@ function show_info() {
 }
 # Just like the command `docker cp`.
 function container_cp() {
-  # Usage: 
+  # Usage:
   # container_cp container_name:/path/in/container /path/in/host
   # container_cp /path/in/host container_name:/path/in/container
   # container_name should not include character `/`
@@ -1163,8 +1163,10 @@ function container_console_main() {
   esac
 }
 function container_console() {
-  # It has been rewritten with C.
-  container-console --greetings
+  # It has been rewritten with Go.
+  while :; do
+    container_console_main $(container-console)
+  done
   x="${CAT8}\nBye, nya~"
   printf "$x\n"
 }
