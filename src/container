@@ -1164,9 +1164,7 @@ function container_console_main() {
 }
 function container_console() {
   # It has been rewritten with Go.
-  while :; do
-    container_console_main $(container-console)
-  done
+  container-console
   x="${CAT8}\nBye, nya~"
   printf "$x\n"
 }
