@@ -310,6 +310,7 @@ function search_images() {
   else
     CPU_ARCH=$2
   fi
+  echo
   rootfstool search -a $CPU_ARCH -d $OS -m $ROOTFS_MIRROR
 }
 function list_images() {
@@ -320,6 +321,7 @@ function list_images() {
   else
     CPU_ARCH=$1
   fi
+  echo
   rootfstool list -a $CPU_ARCH -m $ROOTFS_MIRROR
 }
 # Most of the code were rewritten to rootfstool.
