@@ -306,7 +306,7 @@ function search_images() {
     return 0
   fi
   if [[ $2 = "" ]]; then
-    GET_CPU_ARCH
+    get_cpu_arch
   else
     CPU_ARCH=$2
   fi
@@ -316,7 +316,7 @@ function list_images() {
   # Usage:
   # list_images (CPU_ARCH)
   if [[ $1 = "" ]]; then
-    GET_CPU_ARCH
+    get_cpu_arch
   else
     CPU_ARCH=$1
   fi
@@ -826,7 +826,7 @@ function create_new_container() {
 *capsh+unshare/unshare will not keep the same container running in the same namspaces.
   "
   #XXX
-  GET_CPU_ARCH
+  get_cpu_arch
   echo
   echo -e "${COLOR}$(po_getmsg "Enter the name of this container.")"
   while :; do
@@ -912,7 +912,7 @@ function create_new_container() {
         export CROSS_ARCH=ppc64 && apt install qemu-user-${CROSS_ARCH}
         break
         ;;
-      "") GET_CPU_ARCH && export CROSS_ARCH=null && break ;;
+      "") get_cpu_arch && export CROSS_ARCH=null && break ;;
       esac
     done
   fi
@@ -1314,7 +1314,7 @@ function easy_create() {
     NUMBER=$(whiptail --title "[] $(po_getmsg "VERSION")" --menu "$(po_getmsg "Choose the version to install:")" 15 $WIDTH 6 $LIST 3>&1 1>&2 2>&3)
     VERSION=$(echo $LIST2 | awk "{print \$$NUMBER}")
   fi
-  GET_CPU_ARCH
+  get_cpu_arch
   if [[ ! -e $PREFIX/var/container/${OS}-${VERSION}-${CPU_ARCH}.tar.xz ]]; then
     PULL_ROOTFS ${OS} ${VERSION} ${CPU_ARCH}
   fi
