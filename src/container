@@ -297,6 +297,31 @@ function container_cp() {
     return
   fi
 }
+function search_images() {
+  # Usage:
+  # search_images OS (CPU_ARCH)
+  OS=$1
+  if [[ $1 == "all" ]]; then
+    list_images $2
+    return 0
+  fi
+  if [[ $2 = "" ]]; then
+    GET_CPU_ARCH
+  else
+    CPU_ARCH=$2
+  fi
+  rootfstool search -a $CPU_ARCH -d $OS -m $ROOTFS_MIRROR
+}
+function list_images() {
+  # Usage:
+  # list_images (CPU_ARCH)
+  if [[ $1 = "" ]]; then
+    GET_CPU_ARCH
+  else
+    CPU_ARCH=$1
+  fi
+  rootfstool list -a $CPU_ARCH -m $ROOTFS_MIRROR
+}
 # Most of the code were rewritten to rootfstool.
 function pull_rootfs() {
   # Usage:
@@ -318,6 +343,10 @@ function pull_rootfs() {
     get_manjaro_rootfs
     return 0
   fi
+  # XXX:parroros
+  mkdir -p $PREFIX/tmp/container
+  cd $PREFIX/tmp/container
+  rootfstool download -d $OS -v $VERSION -a $CPU_ARCH -m ${ROOTFS_MIRROR}
 }
 # These code has been kept because I haven't added them to rootfstool.
 function get_manjaro_rootfs() {
@@ -955,7 +984,7 @@ function create_new_container() {
       return 1
     fi
     if [[ $(echo $OS | awk '{print $1}') == search ]]; then
-      SEARCH_IMAGES $(echo $OS | awk '{print $2}') $CPU_ARCH
+      search_images $(echo $OS | awk '{print $2}') $CPU_ARCH
       printf "${COLOR}"
       continue
     fi

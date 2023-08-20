@@ -45,6 +45,8 @@ build:update-code
 	@mkdir -pv $(O)/share/termux-container
 	@cp -rv doc/* $(O)/doc/termux-container/
 	@cp -rv share $(O)/share/termux-container
+	@mkdir -pv $(O)/etc/container
+	@cp -v src/termux-container.conf $(O)/etc/container/global.conf
 	@mkdir -pv $(O)/bin/
 	@cp -v src/container $(O)/bin/container
 	@cp -v src/rootfstool/rootfstool $(O)/bin/rootfstool
@@ -56,6 +58,7 @@ update-code:
 install:build
 	@printf "\033[1;38;2;254;228;208m[+] Install.\033[0m\n"&&sleep 1s
 	@cp -v $(O)/bin/* /data/data/com.termux/files/usr/bin/
+	@cp -rv $(O)/etc/* /data/data/com.termux/files/usr/etc/
 	@cp -rv $(O)/share/termux-container /data/data/com.termux/files/usr/share/
 	@cp -rv $(O)/doc/* /data/data/com.termux/files/usr/share/doc
 pack-deb:
@@ -64,6 +67,8 @@ pack-deb:
 	@mkdir -pv $(O)/deb/data/data/com.termux/files/usr/bin/
 	@mkdir -pv $(O)/deb/data/data/com.termux/files/usr/share/
 	@mkdir -pv $(O)/deb/data/data/com.termux/files/usr/share/doc
+	@mkdir -pv $(O)/deb/data/data/com.termux/files/usr/etc
+	@cp -rv $(O)/etc/* $(O)/deb/data/data/com.termux/files/usr/etc/
 	@cp -v $(O)/bin/* $(O)/deb/data/data/com.termux/files/usr/bin/
 	@cp -rv $(O)/share/termux-container $(O)/deb/data/data/com.termux/files/usr/share/
 	@cp -rv $(O)/doc/* $(O)/deb/data/data/com.termux/files/usr/share/doc
