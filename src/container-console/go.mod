@@ -1,10 +1,11 @@
-module container-console
+module main
 
 go 1.20
 
 require (
 	github.com/charmbracelet/bubbles v0.16.1
 	github.com/charmbracelet/bubbletea v0.24.2
+	golang.org/x/sys v0.11.0
 )
 
 require (
@@ -22,7 +23,6 @@ require (
 	github.com/muesli/termenv v0.15.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/sys v0.6.0 // indirect
 	golang.org/x/term v0.6.0 // indirect
 	golang.org/x/text v0.3.8 // indirect
 )
