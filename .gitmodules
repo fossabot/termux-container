@@ -4,6 +4,3 @@
 [submodule "src/rootfstool"]
 	path = src/rootfstool
 	url = https://github.com/Moe-hacker/rootfstool
-[submodule "src/container-console"]
-	path = src/container-console
-	url = https://github.com/Moe-hacker/termux-container-console.git
