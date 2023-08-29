@@ -1,7 +1,7 @@
 # THIS BRANCH IS STILL UNDER DEVELOPMENT.
 # DO NOT TRY TO USE THIS BRANCH !!!
 # TERMUX-CONTAINER v9.5, A NEW START.
-# ruri里有两段过于屎山打算重写，还打算学go和bubble tea库，咕咕咕咕咕。。。
+# 等我先搓个yoshinon出来再说，咕咕咕咕咕。。。
 ```
         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
           ●   ●     ●   ● ●● ●● ●   ●  ● ●
