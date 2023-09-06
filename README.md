@@ -1,7 +1,7 @@
 # THIS BRANCH IS STILL UNDER DEVELOPMENT.
 # DO NOT TRY TO USE THIS BRANCH !!!
 # TERMUX-CONTAINER v9.5, A NEW START.
-# 等我先搓个yoshinon出来再说，咕咕咕咕咕。。。
+# 咕咕咕咕咕。。。
 ```
         ●●●●● ●●●●● ●●●●  ●   ● ●   ● ●   ●
           ●   ●     ●   ● ●● ●● ●   ●  ● ●
