@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMoe-hacker%2Ftermux-container.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMoe-hacker%2Ftermux-container?ref=badge_shield)
+
 <p align="center">May The Force Be With You</p>
 <p align="center">(>_×)</p>         
 
@@ -61,3 +63,7 @@ If my work helps, please give me a star !
 --------
 <p align="center">「生きてて良かった、そんなこと思える日を,</p>
 <p align="center">願ってしまうんだ」</p>         
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMoe-hacker%2Ftermux-container.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FMoe-hacker%2Ftermux-container?ref=badge_large)
